@@ -1,0 +1,96 @@
+% \file{theme/mu/beamercolorthemefibeamer-fi.sty}
+% This is the color theme for presentations written at the
+% Faculty of Informatics at the Masaryk University in Brno.
+% This theme has no effect outside the presentation mode.
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{fibeamer/theme/mu/%
+  beamercolorthemefibeamer-mu-fi}[2015/08/26]
+\mode<presentation>
+%    \end{macrocode}
+% This color theme uses the combination of yellow and dark gray in light frames
+% and the combination of gold and white in dark frames.  The
+% |fibeamer@back|\-|groundInner| and |fibeamer@backgroundOuter| colors are used
+% within the background canvas template, which is defined within the color
+% theme of the Masaryk University and which draws the gradient background of
+% dark frames.
+%    \begin{macrocode}
+  \definecolor{fibeamer@gold}{HTML}{a47312}
+  \definecolor{fibeamer@yellow}{HTML}{FFE169}
+  \definecolor{fibeamer@yellowDark}{HTML}{E9BC09}
+  \definecolor{fibeamer@gray}{HTML}{999999}
+  \colorlet{fibeamer@backgroundInner}{fibeamer@gold}
+  \colorlet{fibeamer@backgroundOuter}{fibeamer@gold!60!black}
+%    \end{macrocode}
+% The |darkframes| environment switches the |\iffibeamer@darktrue|
+% conditional on and sets a dark color theme.
+%    \begin{macrocode}
+  \renewenvironment{darkframes}{%
+    \begingroup
+      \fibeamer@darktrue
+      %% Structures
+      \setbeamercolor*{structure}{fg=white, bg=fibeamer@gold}
+      \setbeamercolor*{frametitle}{fg=fibeamer@gold!25!white}
+      \setbeamercolor*{framesubtitle}{fg=white}
+      %% Text
+      \setbeamercolor*{normal text}{fg=white, bg=white}
+      %% Items
+      \setbeamercolor*{item}{fg=fibeamer@gold!25!white}
+      \setbeamercolor{footnote mark}{fg=fibeamer@gold!25!white}
+      %% Blocks
+      \setbeamercolor*{block title}{
+        use=structure, fg=white, bg=fibeamer@gold!60!white}
+      \setbeamercolor*{block title example}{
+        use=example text, fg=white, bg=fibeamer@gold!60!white}
+      \setbeamercolor*{block title alerted}{
+        use=alerted text, fg=white, bg=fibeamer@gold!90!white}
+      \setbeamercolor*{block body}{
+        fg=fibeamer@gold, use=block title,
+        bg=fibeamer@gray!15!white}
+      \usebeamercolor*{normal text}
+      % Code listings
+      \lstset{
+        commentstyle=\color{green!25!white},
+        keywordstyle=\color{blue!25!white},
+        stringstyle=\color{fibeamer@gold!30!white}}
+      }{%
+    \endgroup}
+%    \end{macrocode}
+% Outside the |darkframes| environment, the light theme is used.
+%    \begin{macrocode}
+  %% Structures
+  \setbeamercolor{structure}{fg=black!75!white, bg=white}
+  \setbeamercolor{frametitle}{fg=fibeamer@yellowDark}
+  \setbeamercolor{framesubtitle}{fg=black!60!white}
+  %% Text
+  \setbeamercolor{normal text}{fg=black!75!white}
+  %% Items
+  \setbeamercolor{item}{fg=fibeamer@yellowDark}
+  \setbeamercolor{footnote mark}{fg=fibeamer@yellowDark}
+  %% Blocks
+  \setbeamercolor{block title}{
+    use=structure, fg=black!75!white, bg=fibeamer@yellow}
+  \setbeamercolor{block title example}{
+    use=example text, fg=black!75!white, bg=fibeamer@yellow}
+  \setbeamercolor{block title alerted}{
+    use=alerted text, fg=white, bg=black!75!white}
+  \setbeamercolor{block body}{
+    fg=fibeamer@yellow, use=block title, bg=black!75!white}
+  %% Title
+  \setbeamercolor{title}{fg=white, bg=fibeamer@gold}
+  \setbeamercolor{title}{use=structure}
+  % Code listings
+  \lstset{
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    commentstyle=\color{green!60!black},
+    extendedchars=true,
+    keywordstyle=\color{blue},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    stringstyle=\color{violet}}
+\mode
+<all>
+%    \end{macrocode}

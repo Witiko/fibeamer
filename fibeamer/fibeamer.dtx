@@ -1,0 +1,402 @@
+% \iffalse\begin{macrocode}
+%<*driver>
+
+\documentclass{ltxdoc}
+\usepackage[utf8]{inputenc} % this file uses UTF-8
+\usepackage[english]{babel}
+\usepackage{tgpagella}
+\usepackage{tabularx}
+\usepackage{hologo}
+\usepackage{booktabs}
+\usepackage[scaled=0.86]{berasans}
+\usepackage[scaled=1.03]{inconsolata}
+\usepackage[resetfonts]{cmap}
+\usepackage[T1]{fontenc} % use 8bit fonts
+\emergencystretch 2dd
+\usepackage{hypdoc}
+
+% Making paragraphs numbered
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-2.5ex\@plus -1ex \@minus -.25ex}%
+            {1.25ex \@plus .25ex}%
+            {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign
+\setcounter{tocdepth}{4}    % how many sectioning levels to show
+
+% ltxdoc class options
+\CodelineIndex
+\MakeShortVerb{|}
+\EnableCrossrefs
+\DoNotIndex{}
+\makeatletter
+\c@IndexColumns=2
+\makeatother
+
+\begin{document}
+  \RecordChanges
+  \DocInput{fibeamer.dtx}
+  \PrintIndex
+  \PrintChanges
+\end{document}
+
+%</driver>
+%    \end{macrocode}
+%<*class>
+\NeedsTeXFormat{LaTeX2e}
+% Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
+\def\fibeamer@version{2015/08/27 v1.0.0 fibeamer MU beamer theme}
+% {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
+% 
+% \title{The beamer theme for the typesetting of thesis defense
+%   presentations at the Masaryk University in Brno}
+% \author{Vít Novotný, Andrew Mundy}
+% \date{\today}
+% \maketitle
+%
+% \begin{abstract}
+% \noindent This document details the design and the implementation
+% of the \textsf{fibeamer} theme for the \textsf{beamer} document
+% class. It contains technical information for anyone who wishes to
+% extend the class with their style files.
+% \end{abstract}
+%
+% \tableofcontents
+%
+% \section{Package options}
+% \subsection{The \texttt{fonts} option}
+% \begin{macro}{\iffibeamer@fonts}
+% The |fonts| option instructs the package to set up the
+% combination of the font families of Carlito, Arev, Iwona, Dsfont
+% and DejaVu Sans Mono for the typesetting of roman, italic or
+% monospaced text and mathematics. This option is enabled by
+% default.
+%    \begin{macrocode}
+\ProvidesPackage{fibeamer/beamerthemefibeamer}[\fibeamer@version]
+\newif\iffibeamer@fonts
+\DeclareOptionBeamer{fonts}{\fibeamer@fontstrue}
+\ExecuteOptionsBeamer{fonts}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{The \texttt{nofonts} option}
+% The |nofonts| option instructs the package not to alter the
+% currently set text and mathematics font families.
+%    \begin{macrocode}
+\DeclareOptionBeamer{nofonts}{\fibeamer@fontsfalse}
+%    \end{macrocode}
+% \begin{macro}{\fibeamer@university}
+% \subsection{The \texttt{university} option}
+% The \marg{\texttt{university}=identifier} option pair sets the
+% identifier of the university, at which the presentation is being
+% written, to \textit{identifier}. The \textit{identifier} is
+% stored within the |\fibeamer@university| macro, whose
+% implicit value is \texttt{mu}. This value corresponds to the
+% Masaryk University in Brno.
+%    \begin{macrocode}
+\DeclareOptionBeamer{university}{\def\fibeamer@university{#1}}
+\ExecuteOptionsBeamer{university=mu}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@faculty}
+% \subsection{The \texttt{faculty} option}
+% The \marg{\texttt{faculty}=identifier} pair sets the faculty, at
+% which the thesis is being written, to \textit{domain}. The
+% following faculty \textit{identifier}s are recognized at the
+% Masaryk University in Brno:
+% \begin{center}\begin{tabularx}{\textwidth}{Xc}\toprule
+%   The faculty & The \textit{domain} name \\\midrule
+%   The Faculty of Informatics & \texttt{fi} \\
+%   The Faculty of Science & \texttt{sci} \\
+%   The Faculty of Law & \texttt{law} \\
+%   The Faculty of Economics and Administration & \texttt{econ} \\
+%   The Faculty of Social Studies & \texttt{fss} \\
+%   The Faculty of Medicine & \texttt{med} \\
+%   The Faculty of Education & \texttt{ped} \\
+%   The Faculty of Arts & \texttt{phil} \\
+%   The Faculty of Sports Studies & \texttt{fsps} \\\bottomrule
+% \end{tabularx}\end{center}
+% The \textit{identifier} is stored within the |\fibeamer@faculty|
+% macro, whose implicit value is \texttt{fi}.
+%    \begin{macrocode}
+\DeclareOptionBeamer{faculty}{\def\fibeamer@faculty{#1}}
+\ExecuteOptionsBeamer{faculty=fi}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@basePath}
+% The \marg{\texttt{basePath}=path} pair sets the \textit{path}
+% containing the package files. The \textit{path} is prepended to
+% every other path (|\fibeamer@logopath| and |\fibeamer@themePath|)
+% used by the package. If non-empty, the
+% \textit{path} gets normalized to \textit{path/}. The normalized
+% \textit{path} is stored within the |\fibeamer@basePath| macro,
+% whose implicit value is |fibeamer/|.
+%    \begin{macrocode}
+\DeclareOptionBeamer{basePath}{%
+  \ifx\fibeamer@empty#1\fibeamer@empty%
+    \def\fibeamer@basePath{}%
+  \else%
+    \def\fibeamer@basePath{#1/}%
+  \fi}
+\ExecuteOptionsBeamer{basePath=fibeamer}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@subdir}
+% The |\fibeamer@subdir| macro returns |/| unchanged, coerces
+% |.|, |..|, |/|\textit{path}, |./|\textit{path} and
+% |../|\textit{path} to |./|, |../|, |/|\textit{path}|/|,
+% |./|\textit{path}|/| and |../|\textit{path}|/|, respectively, and
+% prefixes any other \textit{path} with |\fibeamer@basePath|. This
+% macro is used within the definition of the \texttt{themePath} and
+% \texttt{logoPath} options.
+%    \begin{macrocode}
+\def\fibeamer@subdir#1#2#3#4\empty{%
+  \ifx#1\empty%           <empty> -> <basePath>
+    \fibeamer@basePath
+  \else
+    \if#1/%
+      \ifx#2\empty%             / -> /
+        /%
+      \else%              /<path> -> /<path>/
+        #1#2#3#4/%
+      \fi
+    \else%
+      \if#1.%
+        \ifx#2\empty%           . -> ./
+          ./%
+        \else
+          \if#2.%
+            \ifx#3\empty%      .. -> ../
+              ../%
+            \else
+              \if#3/%   ../<path> -> ../<path>/
+                ../#4/%
+              \else
+                \fibeamer@basePath#1#2#3#4/%
+              \fi
+            \fi
+          \else
+            \if#2/%      ./<path> -> ./<path>/
+              ./#3#4/%
+            \else
+              \fibeamer@basePath#1#2#3#4/%
+            \fi
+          \fi
+        \fi
+      \else
+        \fibeamer@basePath#1#2#3#4/%
+      \fi
+    \fi%
+  \fi}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@themePath}
+% \subsection{The \texttt{themePath} option}
+% The \marg{\texttt{themePath}=path} pair sets the \textit{path}
+% containing the theme files. The \textit{path} is normalized using
+% the |\fibeamer@subdir| macro and stored within the
+% |\fibeamer@stylePath| macro, whose implicit value is
+% |\fibeamer@basepath theme/|. By default, this expands to
+% \texttt{fibeamer/theme/}.
+%    \begin{macrocode}
+\DeclareOptionBeamer{themePath}{%
+  \def\fibeamer@themePath{\fibeamer@subdir#1%
+    \empty\empty\empty\empty}}
+\ExecuteOptionsBeamer{themePath=theme}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@logoPath}
+% \subsection{The \texttt{logoPath} option}
+% The \marg{\texttt{logoPath}=path} pair sets the \textit{path}
+% containing the logo files, which is used by the outer themes to
+% load the faculty logos. The \textit{path} is
+% normalized using the |\fibeamer@subdir| macro and stored
+% within the |\fibeamer@logoPath| macro, whose implicit value
+% is |\fibeamer@basePath| followed by |logo/\fibeamer@university/|. By
+% default, this expands to \texttt{fibeamer/logo/mu/}.
+%    \begin{macrocode}
+\DeclareOptionBeamer{logoPath}{%
+  \def\fibeamer@logoPath{\fibeamer@subdir#1%
+    \empty\empty\empty\empty}}
+\ExecuteOptionsBeamer{logoPath=logo/\fibeamer@university}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@logo}
+% \subsection{The \texttt{logo} option}
+% The \marg{\texttt{logo}=filename} pair sets the prefix of the
+% filename of the logo file to be used as the faculty logo to
+% \textit{filename}. The \textit{filename} is stored within the
+% |\fibeamer@logo| macro, whose implicit value is
+% |\fibeamer@logoPath| \texttt{fibeamer-}|\fibeamer@university|%
+% \texttt{-}|\fibeamer@faculty|. By default, this expands to
+% \texttt{fibeamer/logo/mu/fibeamer-mu-fi}. The filenames of the
+% actual files are |\fibeamer@logo|-light and |\fibeamer@logo|-dark,
+% and correspond to the light and dark versions of the given logo.
+%    \begin{macrocode}
+\DeclareOptionBeamer{logo}{\def\fibeamer@logo{#1}}
+\ExecuteOptionsBeamer{%
+  logo=\fibeamer@logoPath fibeamer-\fibeamer@university-\fibeamer@faculty}
+%    \end{macrocode}
+% \end{macro}
+% \section{Logic}
+% \subsection{Macros}
+% \begin{macro}{\fibeamer@require}
+% The |\fibeamer@require|\marg{package} macro is used to gracefully
+% load a \textit{packages}. Packages that have already been loaded
+% or do not exist are ignored by the macro.
+%    \begin{macrocode}
+\def\fibeamer@require#1{\IfFileExists{#1.sty}{%
+  \@ifpackageloaded{#1}{}{\RequirePackage{#1}}}{}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@requireTheme}
+% The |\fibeamer@requireTheme|\marg{class} macro is used to load a
+% \textit{class} of beamer themes. The following packages are
+% loaded, provided they exist:
+% \begin{itemize}
+%  \item\texttt{beamer}\textit{class}\texttt{themefibeamer} from
+%    the |\fibeamer@themePath| directory -- The base theme file. By
+%    default, this expands to \texttt{fibeamer/theme/beamer}^^A
+%    \textit{class}\texttt{themefibeamer}.
+%  \item\texttt{beamer}\textit{class}\texttt{themefibeamer-}^^A
+%    |\fibeamer@university| from the |\fibeamer@themePath|^^A
+%    \discretionary{}{}{}|\fibeamer@university/| directory -- The
+%    university theme file. By default, this expands to
+%    \texttt{fibeamer/theme/mu/beamer}\textit{class}^^A
+%    \texttt{themefibeamer-mu}.
+%  \item\texttt{beamer}\textit{class}\texttt{themefibeamer-}^^A
+%    |\fibeamer@university|\texttt{-}|\fibeamer@faculty| from the
+%    |\fibeamer@themePath\fibeamer@university/| directory -- The
+%    faculty theme file. By default, this expands to \texttt{^^A
+%    fibeamer/theme/mu/beamer}\textit{class}\texttt{themefibeam^^A
+%    er-mu-fi}.
+% \end{itemize}
+%    \begin{macrocode}
+\def\fibeamer@requireTheme#1{%
+  \fibeamer@require{\fibeamer@themePath beamer#1themefibeamer}
+  \fibeamer@require{\fibeamer@themePath\fibeamer@university%
+    /beamer#1themefibeamer-\fibeamer@university}
+  \fibeamer@require{\fibeamer@themePath\fibeamer@university%
+    /beamer#1themefibeamer-\fibeamer@university-\fibeamer@faculty}}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{Main routine}
+% First, the theme processes the options.
+%    \begin{macrocode}
+\ProcessOptionsBeamer
+%    \end{macrocode}
+% When the |fonts| option is specified, the following packages will
+% be used by the package to configure the fonts in the presentation
+% mode.
+% \begin{itemize}
+%   \item\textsf{ifthen} -- This package is used to construct
+%     compound conditionals.
+%   \item\textsf{ifxetex}, \textsf{ifluatex} -- These packages are
+%     used to detect the used \TeX\ engine.
+%   \item\textsf{lmodern} -- The Latin Modern font family is used
+%     as a fallback for missing glyphs.
+%   \item\textsf{carlito} -- The Carlito font family is used as the
+%     primary text and math font face.
+%   \item\textsf{arevmath} -- The Arev math font family is used for
+%     various symbols and greek alphabet.
+%   \item\textsf{iwona} -- The Iwona font family is used for large
+%     mathAsymbols.
+%   \item\textsf{DejaVuSansMono} -- The DejaVu Sans Mono font
+%     family is used for the typesetting of monospaced text.
+%   \item\textsf{setspace} -- This package is used to adjust the
+%     leading to 115 \%.
+%   \item\textsf{fontenc} -- This package is used to set the font
+%     encoding to Cork. This package is only used outside the
+%     \Hologo{XeTeX} and \Hologo{LuaTeX} engines.
+%   \item\textsf{fontenc} -- This package is used to load fonts.
+%     This package is only used with the \Hologo{XeTeX} and
+%     \Hologo{LuaTeX} engines.
+% \end{itemize}
+%    \begin{macrocode}
+\mode<presentation>
+  % Set up the fonts
+  \iffibeamer@fonts
+    \RequirePackage{ifthen}
+    \RequirePackage{ifxetex}
+    \RequirePackage{ifluatex}
+    \RequirePackage{lmodern}
+    \RequirePackage[sfdefault,lf]{carlito}
+    \renewcommand*\oldstylenums[1]{{\carlitoOsF #1}}
+
+    %% Load arev with scaling factor of .85
+    %% See <http://tex.stackexchange.com/a/181240/70941>
+    \DeclareFontFamily{OML}{zavm}{\skewchar\font=127 }
+    \DeclareFontShape{OML}{zavm}{m}{it}{<-> s*[.85] zavmri7m}{}
+    \DeclareFontShape{OML}{zavm}{b}{it}{<-> s*[.85] zavmbi7m}{}
+    \DeclareFontShape{OML}{zavm}{m}{sl}{<->ssub * zavm/m/it}{}
+    \DeclareFontShape{OML}{zavm}{bx}{it}{<->ssub * zavm/b/it}{}
+    \DeclareFontShape{OML}{zavm}{b}{sl}{<->ssub * zavm/b/it}{}
+    \DeclareFontShape{OML}{zavm}{bx}{sl}{<->ssub * zavm/b/sl}{}
+
+    \AtBeginDocument{
+      \SetSymbolFont{operators}   {normal}{OT1}{zavm}{m}{n}
+      \SetSymbolFont{letters}     {normal}{OML}{zavm}{m}{it}
+      \SetSymbolFont{symbols}     {normal}{OMS}{zavm}{m}{n}
+      \SetSymbolFont{largesymbols}{normal}{OMX}{iwona}{m}{n}}
+    \RequirePackage[sans]{dsfont}
+
+    \ifthenelse{\boolean{xetex}\OR\boolean{luatex}}{
+      \RequirePackage{fontspec}
+      \setmonofont[Scale=0.85,Ligatures=TeX]{DejaVu Sans Mono}
+    }{
+      \usepackage[scaled=0.85]{DejaVuSansMono}
+      \RequirePackage[resetfonts]{cmap}
+      \RequirePackage[T1]{fontenc}
+    }
+    \RequirePackage{setspace}
+    \setstretch{1.15}
+  \fi
+\mode
+  <all>
+%    \end{macrocode}
+% Finally, the color, font, inner and outer themes of the
+% respective university and faculty will be loaded.
+%    \begin{macrocode}
+\fibeamer@requireTheme{color}
+\fibeamer@requireTheme{font}
+\fibeamer@requireTheme{inner}
+\fibeamer@requireTheme{outer}
+%    \end{macrocode}
+%
+% \section{Themes}
+% This section contains the combined documentation of all available
+% themes.  When creating a new theme file, it is advisable to
+% create one self-contained \texttt{dtx} file, which is then
+% partitioned into locale files via the \textsf{docstrip} tool
+% based on the respective \texttt{ins} file. A
+% \DescribeMacro{\file} macro |\file|\marg{filename} is available
+% for the sectioning of the documentation of various files within
+% the \texttt{dtx} file. For more information about \texttt{dtx}
+% files and the \textsf{docstrip} tool, consult the \textsf{dtxtut,
+% docstrip, doc} and \textsf{ltxdoc} manuals.
+%
+% \def\file#1{\subsubsection{The \texttt{#1} file}}
+%
+% \subsection{Base files}
+% \input{theme/mu/base.dtx}
+% \subsection{The Faculty of Informatics}
+% \input{theme/mu/fi.dtx}
+% \subsection{The Faculty of Science}
+% \input{theme/mu/sci.dtx}
+% \subsection{The Faculty of Arts}
+% \input{theme/mu/phil.dtx}
+% \subsection{The Faculty of Education}
+% \input{theme/mu/ped.dtx}
+% \subsection{The Faculty of Social Studies}
+% \input{theme/mu/fss.dtx}
+% \subsection{The Faculty of Law}
+% \input{theme/mu/law.dtx}
+% \subsection{The Faculty of Economics and Administration}
+% \input{theme/mu/econ.dtx}
+% \subsection{The Faculty of Medicine}
+% \input{theme/mu/med.dtx}
+% \subsection{The Faculty of Sports Studies}
+% \input{theme/mu/fsps.dtx}
+% \iffalse
+%</class>
+% \fi
