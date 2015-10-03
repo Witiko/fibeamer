@@ -124,6 +124,12 @@
 % \begin{itemize}
 %   \item\textsf{ifthen} -- This package is used to construct
 %     compound conditionals.
+%   \item\textsf{ifpdf} -- This package is used to check, whether
+%     the document is being typeset in DVI mode. If it is, then
+%     the |\pdfpagewidth| and |\pdfpageheight| dimensions are
+%     defined, so that positioning in TikZ works correctly.
+%     \changes{v1.0.1}{2015/10/02}{Added DVI output support. [VN]}
+%     ^^A <http://tex.stackexchange.com/a/246631/70941>
 %   \item\textsf{tikz} -- This package is used to position the
 %     logo and the frame number on a frame.
 %   \item\textsf{pgfcore} -- This package is used to draw the
@@ -131,6 +137,13 @@
 % \end{itemize}
 %    \begin{macrocode}
   \RequirePackage{ifthen}
+  \RequirePackage{ifpdf}
+  \ifpdf\else
+    \@ifundefined{pdfpagewidth}{\newdimen\pdfpagewidth}{}
+    \@ifundefined{pdfpageheight}{\newdimen\pdfpageheight}{}
+    \pdfpagewidth=\paperwidth
+    \pdfpageheight=\paperheight
+  \fi
   \RequirePackage{tikz}
   \RequirePackage{pgfcore}
 %    \end{macrocode}
