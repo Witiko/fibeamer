@@ -77,7 +77,7 @@ $(TDSARCHIVE):
 
 # This target generates a distribution file
 $(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
-	$(DOCS) $(PDFSOURCES) $(EXAMPLES) $(VERSION)
+	$(DOCS) $(PDFSOURCES) $(EXAMPLES) $(VERSION) $(LOGOSOURCES)
 	DIR=`mktemp -d` && mkdir --parents "$$DIR/fibeamer" && \
 	cp --verbose $(TDSARCHIVE) "$$DIR"/fibeamer && \
 	cp --parents --verbose $^ "$$DIR/fibeamer" && \
