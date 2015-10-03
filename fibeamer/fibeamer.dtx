@@ -51,20 +51,28 @@
 % 
 % \title{The beamer theme for the typesetting of thesis defense
 %   presentations at the Masaryk University in Brno}
-% \author{Vít Novotný, Andrew Mundy}
+% \author{Vít Novotný}
 % \date{\today}
 % \maketitle
 %
 % \begin{abstract}
 % \noindent This document details the design and the implementation
 % of the \textsf{fibeamer} theme for the \textsf{beamer} document
-% class. It contains technical information for anyone who wishes to
-% extend the class with their style files.
+% class. Included are technical information for anyone who wishes
+% to extend the theme with their own color themes as well as
+% information for ordinary users.
 % \end{abstract}
 %
 % \tableofcontents
 %
-% \section{Package options}
+% \section{Basic usage}
+% In order to use the \textsf{fibeamer} theme, insert
+% |\usetheme|\oarg{options}|{fibeamer}| into the preamble of a
+% \LaTeX\ document that uses the \textsf{beamer} document class.
+% Refer to Section \ref{sec:options} for the list of available
+% \textit{options}.
+% 
+% \section{Package options}\label{sec:options}
 % \subsection{The \texttt{fonts} option}
 % \begin{macro}{\iffibeamer@fonts}
 % The |fonts| option instructs the package to set up the
@@ -242,7 +250,7 @@
 % \subsection{Macros}
 % \begin{macro}{\fibeamer@require}
 % The |\fibeamer@require|\marg{package} macro is used to gracefully
-% load a \textit{packages}. Packages that have already been loaded
+% load a \textit{package}. Packages that have already been loaded
 % or do not exist are ignored by the macro.
 %    \begin{macrocode}
 \def\fibeamer@require#1{\IfFileExists{#1.sty}{%
