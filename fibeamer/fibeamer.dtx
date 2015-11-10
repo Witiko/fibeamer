@@ -100,6 +100,25 @@
 %    \begin{macrocode}
 \DeclareOptionBeamer{nofonts}{\fibeamer@fontsfalse}
 %    \end{macrocode}
+% \subsection{The \texttt{microtype} option}
+% \begin{macro}{\iffibeamer@microtype}
+% The |microtype| option instructs the package to use the
+% microtypographic extensions of modern \TeX\ engines, such as
+% \hologo{pdfTeX}, \Hologo{LuaTeX}, and (partially)
+% \Hologo{XeLaTeX}. This option is enabled by default.
+%    \begin{macrocode}
+\newif\iffibeamer@microtype
+\DeclareOptionBeamer{microtype}{\fibeamer@microtypetrue}
+\ExecuteOptionsBeamer{microtype}
+%    \end{macrocode}
+% \end{macro}
+% \subsection{The \texttt{nomicrotype} option}
+% The |nomicrotype| option disables the microtypographic
+% extensions. This may be necessary, if an older \TeX\ engine,
+% such as \hologo{TeX} or \hologo{eTeX}, is being used.
+%    \begin{macrocode}
+\DeclareOptionBeamer{nomicrotype}{\fibeamer@microtypefalse}
+%    \end{macrocode}
 % \begin{macro}{\fibeamer@university}
 % \subsection{The \texttt{university} option}
 % The \marg{\texttt{university}=identifier} option pair sets the
@@ -299,6 +318,14 @@
 % First, the theme processes the options.
 %    \begin{macrocode}
 \ProcessOptionsBeamer
+%    \end{macrocode}
+% When the |microtype| option is specified, the \textsf{microtype}
+% package gets loaded.
+%    \begin{macrocode}
+  % Set up the microtypographic extensions
+  \iffibeamer@microtype
+    \RequirePackage{microtype}
+  \fi
 %    \end{macrocode}
 % When the |fonts| option is specified, the following packages will
 % be used by the package to configure the fonts in the presentation
