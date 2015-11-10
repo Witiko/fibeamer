@@ -4,7 +4,7 @@ TEXFILES=sci.tex phil.tex ped.tex med.tex fss.tex fi.tex law.tex \
 	econ.tex fsps.tex
 AUXFILES=*.aux *.log *.nav *.out *.snm *.toc
 SRC=source.tex
-TEX=xelatex
+TEX=lualatex
 .PHONY: all clean
 all: $(PDFFILES) clean
 
