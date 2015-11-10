@@ -189,19 +189,27 @@
 % The outer theme also culls the headline and replaces it with
 % either a dark or light version of the faculty logo, based on the
 % value of the |\iffibeamer@dark| conditional, which is controlled by
-% the color theme.
+% the color theme. The light and dark logos are kept in the
+% \DescribeMacro{\fibeamer@logo@light}|\fibeamer@logo@light| and
+% \DescribeMacro{\fibeamer@logo@dark}|\fibeamer@logo@dark|
+% saveboxes, respectively.
 %    \begin{macrocode}
+  \newsavebox\fibeamer@logo@light
+     \savebox\fibeamer@logo@light{%
+       \includegraphics[width=\fibeamer@logowidth]{\fibeamer@logo-light}}
+  \newsavebox\fibeamer@logo@dark
+     \savebox\fibeamer@logo@dark{%
+       \includegraphics[width=\fibeamer@logowidth]{\fibeamer@logo-dark}}
+
   \defbeamertemplate*{headline}{fibeamer}{%
     \begin{tikzpicture}[overlay,remember picture]
       \node[anchor=north east,xshift=-\fibeamer@logopad]
-      at (current page.north east) {
-        \ifthenelse{\boolean{fibeamer@dark}\OR\c@framenumber=0}{
-          \includegraphics[width=\fibeamer@logowidth]%
-            {\fibeamer@logo-dark}
-        }{
-          \includegraphics[width=\fibeamer@logowidth]%
-            {\fibeamer@logo-light}
-        }
+      at (current page.north east) {%
+        \ifthenelse{\boolean{fibeamer@dark}\OR\c@framenumber=0}{%
+          \usebox{\fibeamer@logo@dark}%
+        }{%
+          \usebox{\fibeamer@logo@light}%
+        }%
       };
     \end{tikzpicture}}
 %    \end{macrocode}
