@@ -1,5 +1,5 @@
 SUBMAKES_REQUIRED=theme/mu logo/mu
-SUBMAKES_MISCELLANEOUS=demo
+SUBMAKES_MISCELLANEOUS=..
 SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_MISCELLANEOUS)
 .PHONY: all complete clean dist dist-implode implode \
 	install uninstall $(SUBMAKES)
@@ -10,11 +10,10 @@ LOGOSOURCES=logo/mu/*.svg
 LOGOS=logo/mu/*.pdf logo/mu/*.eps
 DTXFILES=*.dtx theme/mu/*.dtx
 INSFILES=*.ins theme/mu/*.ins
-MAKES=theme/mu/Makefile logo/mu/Makefile
-USEREXAMPLES=../*.tex ../Makefile ../DESCRIPTION \
-	../beamerthemefibeamer.sty demo/Makefile \
-	demo/DESCRIPTION demo/source.tex demo/res/jabberwocky-dark.pdf \
-	demo/res/jabberwocky-light.pdf
+MAKES=theme/mu/Makefile logo/mu/Makefile Makefile
+USEREXAMPLES=../*.tex ../*.ins ../*.pdf ../example.dtx \
+	../Makefile ../resources/jabberwocky-dark.pdf \
+	../resources/jabberwocky-light.pdf
 DEVEXAMPLES=logo/EXAMPLE/DESCRIPTION logo/mu/DESCRIPTION \
 	logo/DESCRIPTION theme/EXAMPLE/DESCRIPTION theme/mu/DESCRIPTION \
 	theme/DESCRIPTION
@@ -86,10 +85,10 @@ $(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
 
 # This target generates a CTAN distribution file
 $(CTANARCHIVE): $(SOURCES) $(MAKES) $(LOGOSOURCES) $(DOCS) \
-	$(DEVEXAMPLES) $(VERSION)
-	DIR=`mktemp -d` && mkdir --parents "$$DIR/fibeamer" && \
+	$(EXAMPLES) $(VERSION)
+	DIR=`mktemp -d` && mkdir --parents "$$DIR/fibeamer/fibeamer" && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \
-	cp --parents --verbose $^ "$$DIR/fibeamer" && \
+	cp --parents --verbose $^ "$$DIR/fibeamer/fibeamer" && \
 	(cd "$$DIR" && zip -r -v -nw $@ *) && \
 	mv "$$DIR"/$@ . && rm -rf "$$DIR"
 

@@ -1,22 +1,72 @@
+%    \begin{macrocode}
 \documentclass{beamer}
-  \usepackage[basePath=..,faculty=?]%
-    {../beamerthemefibeamer}
-  \usepackage{polyglossia}
-  \setmainlanguage{english}
-  \setotherlanguage{czech}
-  \setotherlanguage{slovak}
-  \usepackage{ragged2e}  % `\justify` text
-  \usepackage{booktabs}  % Tables
-  \usepackage{tabularx}
-  \usepackage{tikz}      % Diagrams
-  \usetikzlibrary{calc, shapes, backgrounds}
-  \usepackage{amsmath, amssymb}
-  \usepackage{url}       % `\url`s
-  \usepackage{listings}  % Code listings
-  \frenchspacing
-  \title{Presentation Title}
-  \subtitle{Presentation Subtitle}
-  \author{Author's Name}
+%<*econ>
+\usetheme[faculty=econ]{fibeamer}
+%</econ>
+%<*fi>
+\usetheme[faculty=fi]{fibeamer}
+%</fi>
+%<*fsps>
+\usetheme[faculty=fsps]{fibeamer}
+%</fsps>
+%<*fss>
+\usetheme[faculty=fss]{fibeamer}
+%</fss>
+%<*law>
+\usetheme[faculty=law]{fibeamer}
+%</law>
+%<*med>
+\usetheme[faculty=med]{fibeamer}
+%</med>
+%<*ped>
+\usetheme[faculty=ped]{fibeamer}
+%</ped>
+%<*phil>
+\usetheme[faculty=phil]{fibeamer}
+%</phil>
+%<*sci>
+\usetheme[faculty=sci]{fibeamer}
+%</sci>
+%<*pdftex>
+\usepackage[utf8]{inputenc}
+\usepackage[
+  main=english, %% By using `czech` or `slovak` as the main locale
+                %% instead of `english`, you can typeset the
+                %% presentation in either Czech or Slovak,
+                %% respectively.
+  czech, slovak %% The additional keys allow foreign texts to be
+]{babel}        %% typeset as follows:
+%%
+%%   \begin{otherlanguage}{czech}   ... \end{otherlanguage}
+%%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
+%%
+%</pdftex>
+%<*luatex>
+\usepackage{polyglossia}  %% By using `czech` or `slovak` as the
+\setmainlanguage{english} %% main locale instead of `english`, you
+%% can typeset the presentation in either Czech or Slovak,
+%% respectively.
+\setotherlanguages{czech, slovak} %% The additional keys allow
+% foreign texts to be typeset as follows:
+%%
+%%   \begin{otherlanguage}{czech}   ... \end{otherlanguage}
+%%   \begin{otherlanguage}{slovak}  ... \end{otherlanguage}
+%%
+%</luatex>
+%% These macros specify information about the presentation
+\title{Presentation Title} %% that will be typeset on the
+\subtitle{Presentation Subtitle} %% title page.
+\author{Author's Name}
+%% These additional packages are used within the document:
+\usepackage{ragged2e}  % `\justify` text
+\usepackage{booktabs}  % Tables
+\usepackage{tabularx}
+\usepackage{tikz}      % Diagrams
+\usetikzlibrary{calc, shapes, backgrounds}
+\usepackage{amsmath, amssymb}
+\usepackage{url}       % `\url`s
+\usepackage{listings}  % Code listings
+\frenchspacing
 \begin{document}
   \frame{\maketitle}
   \begin{frame}{Jabberwocky}
@@ -24,7 +74,7 @@
     \begin{tikzpicture}[overlay,remember picture]
       \node[anchor=south east,xshift=-30pt,yshift=35pt]
         at (current page.south east) {
-          \includegraphics[width=35mm]{res/jabberwocky-light}
+          \includegraphics[width=35mm]{resources/jabberwocky-light}
         };
     \end{tikzpicture}%¨
     'Twas brillig, and the slithy toves\\
@@ -285,7 +335,7 @@ int main(int argc, char **argv)
       \begin{tikzpicture}[overlay,remember picture]
         \node[anchor=south east,xshift=-30pt,yshift=35pt]
           at (current page.south east) {
-            \includegraphics[width=35mm]{res/jabberwocky-dark}
+            \includegraphics[width=35mm]{resources/jabberwocky-dark}
           };
       \end{tikzpicture}%
       'Twas brillig, and the slithy toves\\
@@ -327,3 +377,4 @@ int main(int argc, char **argv)
     \againframe{bib}
   \end{darkframes}
 \end{document}
+%    \end{macrocode}
