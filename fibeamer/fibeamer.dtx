@@ -15,6 +15,7 @@
 \emergencystretch 2dd
 \usepackage{hypdoc}
 \usepackage[protrusion]{microtype}
+\usepackage{ragged2e}
 
 % Making paragraphs numbered
 \makeatletter
@@ -39,6 +40,7 @@
   \RecordChanges
   \DocInput{fibeamer.dtx}
   \PrintIndex
+  \RaggedRight
   \PrintChanges
 \end{document}
 
@@ -47,13 +49,9 @@
 %<*class>
 \NeedsTeXFormat{LaTeX2e}
 % Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
-\def\fibeamer@version{2015/10/03 v1.0.1 fibeamer MU beamer theme}
+\def\fibeamer@version{2015/11/18 v1.0.2 fibeamer MU beamer theme}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
-% 
-% 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % \title{The beamer theme for the typesetting of thesis defense
@@ -101,6 +99,8 @@
 \DeclareOptionBeamer{nofonts}{\fibeamer@fontsfalse}
 %    \end{macrocode}
 % \subsection{The \texttt{microtype} option}
+% \changes{v1.0.2}{2015/11/18}{Added the opt-out \texttt{microtype
+% option}. [VN]}
 % \begin{macro}{\iffibeamer@microtype}
 % The |microtype| option instructs the package to use the
 % microtypographic extensions of modern \TeX\ engines, such as

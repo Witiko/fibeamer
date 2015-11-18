@@ -51,8 +51,7 @@ $(SUBMAKES):
 	make -C $@ all
 
 # This pseudo-target creates the distribution archive.
-dist: all
-	make $(PDFS) clean
+dist: complete
 	make $(TDSARCHIVE) $(DISTARCHIVE) $(CTANARCHIVE)
 
 # This target creates the theme files.
