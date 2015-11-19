@@ -77,7 +77,7 @@ $(TDSARCHIVE):
 # This target generates a distribution file
 $(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
 	$(DOCS) $(PDFSOURCES) $(EXAMPLES) $(VERSION) $(LOGOSOURCES)
-	DIR=`mktemp -d` && mkdir --parents "$$DIR/fibeamer" && \
+	DIR=`mktemp -d` && mkdir -p "$$DIR/fibeamer" && \
 	cp --verbose $(TDSARCHIVE) "$$DIR"/fibeamer && \
 	cp --parents --verbose $^ "$$DIR/fibeamer" && \
 	(cd "$$DIR" && zip -r -v -nw $@ *) && \
@@ -86,7 +86,7 @@ $(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
 # This target generates a CTAN distribution file
 $(CTANARCHIVE): $(SOURCES) $(MAKES) $(LOGOSOURCES) $(DOCS) \
 	$(EXAMPLES) $(VERSION)
-	DIR=`mktemp -d` && mkdir --parents "$$DIR/fibeamer/fibeamer" && \
+	DIR=`mktemp -d` && mkdir -p "$$DIR/fibeamer/fibeamer" && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \
 	cp --parents --verbose $^ "$$DIR/fibeamer/fibeamer" && \
 	(cd "$$DIR" && zip -r -v -nw $@ *) && \
@@ -105,15 +105,15 @@ install:
 	fi
 	
 	# Theme and logo files
-	mkdir --parents "$(to)/tex/latex/fibeamer"
+	mkdir -p "$(to)/tex/latex/fibeamer"
 	cp --parents --verbose $(RESOURCES) "$(to)/tex/latex/fibeamer"
 	
 	# Source files
-	mkdir --parents "$(to)/source/latex/fibeamer"
+	mkdir -p "$(to)/source/latex/fibeamer"
 	cp --parents --verbose $(SOURCES) "$(to)/source/latex/fibeamer"
 	
 	# Documentation
-	mkdir --parents "$(to)/doc/latex/fibeamer"
+	mkdir -p "$(to)/doc/latex/fibeamer"
 	cp --parents --verbose $(DOCS) "$(to)/doc/latex/fibeamer"
 	
 	# Rebuild the hash
