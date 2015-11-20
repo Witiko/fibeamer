@@ -34,7 +34,7 @@ MISCELLANEOUS=guide/mu/guide.bib \
   guide/mu/resources/vader.pdf guide/mu/resources/yoda.pdf \
 	$(USEREXAMPLES:.pdf=.tex) \
 	example/mu/resources/jabberwocky-dark.pdf \
-	example/mu/resources/jabberwocky-light.pdf
+	example/mu/resources/jabberwocky-light.pdf README.md
 RESOURCES=$(THEMEFILES) $(LOGOS)
 SOURCES=$(DTXFILES) $(INSFILES) LICENSE.tex
 AUXFILES=fibeamer.aux fibeamer.log fibeamer.toc fibeamer.ind \
@@ -46,7 +46,7 @@ GUIDES=guide/mu/econ.pdf guide/mu/fi.pdf guide/mu/fsps.pdf \
 	guide/mu/fss.pdf guide/mu/law.pdf guide/mu/med.pdf \
 	guide/mu/ped.pdf guide/mu/phil.pdf guide/mu/sci.pdf
 PDFS=$(MANUAL) $(GUIDES) $(USEREXAMPLES)
-DOCS=$(MANUAL) $(GUIDES) README
+DOCS=$(MANUAL) $(GUIDES)
 VERSION=VERSION.tex
 TDSARCHIVE=fibeamer.tds.zip
 CTANARCHIVE=fibeamer.ctan.zip

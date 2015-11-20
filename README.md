@@ -25,9 +25,10 @@ guide files within the `guide/` subdirectory.
 To begin the installation, execute the following command from within
 the current directory:
 
-  make complete install to=[[TDS]] nohash=true
+    make complete
+    make install to=[[TDS]] nohash=true
 
-and replace [[TDS]] with a path to the TeX directory structure into
+and replace `[[TDS]]` with a path to the TeX directory structure into
 which you want to install the package (such as `/usr/share/texmf`).
 If necessary, update the file name database of your TeX
 distribution:
@@ -51,9 +52,9 @@ distribution:
 To uninstall the package, execute the following command from within
 the current directory:
 
-  make uninstall from=[[TDS]] nohash=true
+    make uninstall from=[[TDS]] nohash=true
 
-and replace [[TDS]] with a path to the TeX directory structure into
+and replace `[[TDS]]` with a path to the TeX directory structure into
 which you want to install the package (such as `/usr/share/texmf`).
 If necessary, update the file name database of your TeX
 distribution.
