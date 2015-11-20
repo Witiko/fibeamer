@@ -13,6 +13,7 @@ environment as well as the following tools:
 
   * GNU `make`
   * `inkscape`
+  * `pdftops`
 
 Aside from these tools, the installation requires a correctly
 configured TeX distribution containing the pdfTeX and XeTeX engines
