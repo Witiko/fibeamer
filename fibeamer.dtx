@@ -14,7 +14,7 @@
 \usepackage[T1]{fontenc} % use 8bit fonts
 \emergencystretch 2dd
 \usepackage{hypdoc}
-\usepackage[protrusion]{microtype}
+\usepackage{microtype}
 \usepackage{ragged2e}
 
 % Making paragraphs numbered
@@ -49,8 +49,15 @@
 %<*class>
 \NeedsTeXFormat{LaTeX2e}
 % Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
-\def\fibeamer@version{2015/11/18 v1.0.2 fibeamer MU beamer theme}
+\def\fibeamer@version{2015/11/20 v1.0.3 fibeamer MU beamer theme}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% \changes{v1.0.3} {2015/11/20}{The example documents from the
+%   \texttt{example} directory and the user guide from the
+%   \texttt{guide} directory are now a part of the CTAN archive.
+%   [VN]}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -81,10 +88,9 @@
 % \subsection{The \texttt{fonts} option}
 % \begin{macro}{\iffibeamer@fonts}
 % The |fonts| option instructs the package to set up the
-% combination of the font families of Carlito, Arev, Iwona, Dsfont
-% and DejaVu Sans Mono for the typesetting of roman, italic or
-% monospaced text and mathematics. This option is enabled by
-% default.
+% combination of the font families of Carlito, Arev, Iwona, Dsfont,
+% and DejaVu for the typesetting of text and mathematics. This
+% option is enabled by default.
 %    \begin{macrocode}
 \ProvidesPackage{fibeamer/beamerthemefibeamer}[\fibeamer@version]
 \newif\iffibeamer@fonts
@@ -158,6 +164,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\fibeamer@basePath}
+% \subsection{The \texttt{basePath} option}
 % The \marg{\texttt{basePath}=path} pair sets the \textit{path}
 % containing the package files. The \textit{path} is prepended to
 % every other path (|\fibeamer@logopath| and |\fibeamer@themePath|)
@@ -335,22 +342,22 @@
 %     compound conditionals.
 %   \item\textsf{ifxetex}, \textsf{ifluatex} -- These packages are
 %     used to detect the used \TeX\ engine.
-%   \item\textsf{lmodern} -- The Latin Modern font family is used
-%     as a fallback for missing glyphs.
+%   \item\textsf{lmodern} -- The Latin Modern font family is used as a
+%     fallback for missing glyphs.
 %   \item\textsf{carlito} -- The Carlito font family is used as the
 %     primary text and math font face.
-%   \item\textsf{arevmath} -- The Arev math font family is used for
+%   \item\textsf{arevmath} -- The Arev Sans math font family is used for
 %     various symbols and greek alphabet.
 %   \item\textsf{iwona} -- The Iwona font family is used for large
-%     mathAsymbols.
-%   \item\textsf{DejaVuSansMono} -- The DejaVu Sans Mono font
-%     family is used for the typesetting of monospaced text.
+%     math symbols.
+%   \item\textsf{dejavu} -- The DejaVu Sans Mono font family is
+%     used for the typesetting of monospaced text.
 %   \item\textsf{setspace} -- This package is used to adjust the
 %     leading to 115 \%.
 %   \item\textsf{fontenc} -- This package is used to set the font
 %     encoding to Cork. This package is only used outside the
 %     \Hologo{XeTeX} and \Hologo{LuaTeX} engines.
-%   \item\textsf{fontenc} -- This package is used to load fonts.
+%   \item\textsf{fontspec} -- This package is used to load fonts.
 %     This package is only used with the \Hologo{XeTeX} and
 %     \Hologo{LuaTeX} engines.
 % \end{itemize}

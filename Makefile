@@ -1,8 +1,9 @@
 SUBMAKES_REQUIRED=theme/mu logo/mu
-SUBMAKES_MISCELLANEOUS=example/mu
+SUBMAKES_MISCELLANEOUS=guide/mu example/mu
 SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_MISCELLANEOUS)
 .PHONY: all complete clean dist dist-implode implode \
-	install uninstall $(SUBMAKES)
+	install uninstall $(SUBMAKES_REQUIRED)
+
 BASETHEMEFILE=beamerthemefibeamer.sty
 OTHERTHEMEFILES=theme/mu/*.sty
 THEMEFILES=$(BASETHEMEFILE) $(OTHERTHEMEFILES)
@@ -10,33 +11,30 @@ LOGOSOURCES=logo/mu/*.svg
 LOGOS=logo/mu/*.pdf logo/mu/*.eps
 DTXFILES=*.dtx theme/mu/*.dtx
 INSFILES=*.ins theme/mu/*.ins
-MAKES=theme/mu/Makefile logo/mu/Makefile Makefile
-USEREXAMPLES=example/mu/econ-lualatex.tex \
-	example/mu/econ-pdflatex.tex example/mu/fi-lualatex.tex \
-	example/mu/fi-pdflatex.tex example/mu/fsps-lualatex.tex \
-	example/mu/fsps-pdflatex.tex  example/mu/fss-lualatex.tex \
-	example/mu/fss-pdflatex.tex example/mu/law-lualatex.tex \
-	example/mu/law-pdflatex.tex  example/mu/med-lualatex.tex \
-	example/mu/med-pdflatex.tex example/mu/ped-lualatex.tex \
-	example/mu/ped-pdflatex.tex  example/mu/phil-lualatex.tex \
-	example/mu/phil-pdflatex.tex example/mu/sci-lualatex.tex \
-	example/mu/sci-pdflatex.tex example/mu/econ-lualatex.pdf \
-	example/mu/econ-pdflatex.pdf  example/mu/fi-lualatex.pdf \
+MAKES=guide/mu/Makefile theme/mu/Makefile logo/mu/Makefile Makefile
+USEREXAMPLES=example/mu/econ-lualatex.pdf \
+	example/mu/econ-pdflatex.pdf example/mu/fi-lualatex.pdf \
 	example/mu/fi-pdflatex.pdf example/mu/fsps-lualatex.pdf \
-	example/mu/fsps-pdflatex.pdf  example/mu/fss-lualatex.pdf \
+	example/mu/fsps-pdflatex.pdf example/mu/fss-lualatex.pdf \
 	example/mu/fss-pdflatex.pdf example/mu/law-lualatex.pdf \
-	example/mu/law-pdflatex.pdf  example/mu/med-lualatex.pdf \
+	example/mu/law-pdflatex.pdf example/mu/med-lualatex.pdf \
 	example/mu/med-pdflatex.pdf example/mu/ped-lualatex.pdf \
 	example/mu/ped-pdflatex.pdf example/mu/phil-lualatex.pdf \
 	example/mu/phil-pdflatex.pdf example/mu/sci-lualatex.pdf \
-	example/mu/sci-pdflatex.pdf \
-	example/mu/resources/jabberwocky-dark.pdf \
-	example/mu/resources/jabberwocky-light.pdf
+	example/mu/sci-pdflatex.pdf
 DEVEXAMPLES=logo/EXAMPLE/DESCRIPTION logo/mu/DESCRIPTION \
 	logo/DESCRIPTION theme/EXAMPLE/DESCRIPTION theme/mu/DESCRIPTION \
 	theme/DESCRIPTION example/DESCRIPTION example/EXAMPLE/DESCRIPTION \
-	example/mu/DESCRIPTION example/mu/resources/DESCRIPTION
+	example/mu/DESCRIPTION example/mu/resources/DESCRIPTION \
+	guide/DESCRIPTION guide/EXAMPLE/DESCRIPTION \
+	guide/mu/DESCRIPTION guide/mu/resources/DESCRIPTION
 EXAMPLES=$(USEREXAMPLES) $(DEVEXAMPLES)
+MISCELLANEOUS=guide/mu/guide.bib \
+	guide/mu/guide.dtx guide/mu/*.ins guide/mu/resources/cog.pdf \
+  guide/mu/resources/vader.pdf guide/mu/resources/yoda.pdf \
+	$(USEREXAMPLES:.pdf=.tex) \
+	example/mu/resources/jabberwocky-dark.pdf \
+	example/mu/resources/jabberwocky-light.pdf
 RESOURCES=$(THEMEFILES) $(LOGOS)
 SOURCES=$(DTXFILES) $(INSFILES) LICENSE.tex
 AUXFILES=fibeamer.aux fibeamer.log fibeamer.toc fibeamer.ind \
@@ -44,8 +42,11 @@ AUXFILES=fibeamer.aux fibeamer.log fibeamer.toc fibeamer.ind \
 	fibeamer.glo fibeamer.hd
 MANUAL=fibeamer.pdf
 PDFSOURCES=fibeamer.dtx
-PDFS=$(MANUAL) $(USEREXAMPLES)
-DOCS=$(MANUAL) README
+GUIDES=guide/mu/econ.pdf guide/mu/fi.pdf guide/mu/fsps.pdf \
+	guide/mu/fss.pdf guide/mu/law.pdf guide/mu/med.pdf \
+	guide/mu/ped.pdf guide/mu/phil.pdf guide/mu/sci.pdf
+PDFS=$(MANUAL) $(GUIDES) $(USEREXAMPLES)
+DOCS=$(MANUAL) $(GUIDES) README
 VERSION=VERSION.tex
 TDSARCHIVE=fibeamer.tds.zip
 CTANARCHIVE=fibeamer.ctan.zip
@@ -65,8 +66,8 @@ all: $(SUBMAKES_REQUIRED)
 complete: all $(SUBMAKES)
 	make $(PDFS) clean
 
-# This pseudo-target calls a submakefile
-$(SUBMAKES):
+# This pseudo-target calls a submakefile.
+$(SUBMAKES_REQUIRED):
 	make -C $@ all
 
 # This pseudo-target creates the distribution archive.
@@ -77,33 +78,39 @@ dist: dist-implode complete
 $(BASETHEMEFILE): fibeamer.ins fibeamer.dtx
 	xetex $<
 
+# This target typesets the guides and user examples.
+$(GUIDES) $(USEREXAMPLES): $(RESOURCES)
+	make -BC $(dir $@)
+
 # This target typesets the technical documentation.
 $(MANUAL): $(DTXFILES)
 	pdflatex $<
-	makeindex -s gind.ist $(basename $@)
+	makeindex -s gind.ist                       $(basename $@)
 	makeindex -s gglo.ist -o $(basename $@).gls $(basename $@).glo
 	pdflatex $<
 	pdflatex $<
 
-# This target generates a TeX directory structure file
+# This target generates a TeX directory structure file.
 $(TDSARCHIVE):
 	DIR=`mktemp -d` && \
 	make install to="$$DIR" nohash=true && \
 	(cd "$$DIR" && zip -r -v -nw $@ *) && \
 	mv "$$DIR"/$@ $@ && rm -rf "$$DIR"
 
-# This target generates a distribution file
+# This target generates a distribution file.
 $(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
-	$(DOCS) $(PDFSOURCES) $(EXAMPLES) $(VERSION) $(LOGOSOURCES)
+	$(DOCS) $(PDFSOURCES) $(MISCELLANEOUS) $(EXAMPLES) $(VERSION) \
+	$(LOGOSOURCES)
 	DIR=`mktemp -d` && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \
 	cp --parents --verbose $^ "$$DIR" && \
 	(cd "$$DIR" && zip -r -v -nw $@ *) && \
 	mv "$$DIR"/$@ . && rm -rf "$$DIR"
 
-# This target generates a CTAN distribution file
-$(CTANARCHIVE): $(SOURCES) $(MAKES) $(LOGOSOURCES) $(DOCS) \
-	$(EXAMPLES) $(VERSION)
+# This target generates a CTAN distribution file.
+$(CTANARCHIVE): $(SOURCES) $(MAKES) $(EXAMPLES) \
+	$(MISCELLANEOUS) $(DOCS) $(VERSION) \
+	$(LOGOSOURCES)
 	DIR=`mktemp -d` && mkdir -p "$$DIR/fibeamer" && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \
 	cp --parents --verbose $^ "$$DIR/fibeamer" && \
