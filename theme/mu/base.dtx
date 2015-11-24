@@ -150,7 +150,7 @@
 % This part of the outer theme defines the geometry of the frames
 % along with other dimensions.
 %    \begin{macrocode}
-% The logo dimensions
+  % The dimensions of an imaginary logo in the upper right corner
   \newlength{\fibeamer@logowidth}
   \setlength{\fibeamer@logowidth}{15mm}
   \newlength{\fibeamer@logoheight}
@@ -186,32 +186,9 @@
 %    \begin{macrocode}
   \defbeamertemplate*{navigation symbols}{fibeamer}{}
 %    \end{macrocode}
-% The outer theme also culls the headline and replaces it with
-% either a dark or light version of the faculty logo, based on the
-% value of the |\iffibeamer@dark| conditional, which is controlled by
-% the color theme. The light and dark logos are kept in the
-% \DescribeMacro{\fibeamer@logo@light}|\fibeamer@logo@light| and
-% \DescribeMacro{\fibeamer@logo@dark}|\fibeamer@logo@dark|
-% saveboxes, respectively.
+% The outer theme also culls the headline.
 %    \begin{macrocode}
-  \newsavebox\fibeamer@logo@light
-     \savebox\fibeamer@logo@light{%
-       \includegraphics[width=\fibeamer@logowidth]{\fibeamer@logo-light}}
-  \newsavebox\fibeamer@logo@dark
-     \savebox\fibeamer@logo@dark{%
-       \includegraphics[width=\fibeamer@logowidth]{\fibeamer@logo-dark}}
-
-  \defbeamertemplate*{headline}{fibeamer}{%
-    \begin{tikzpicture}[overlay,remember picture]
-      \node[anchor=north east,xshift=-\fibeamer@logopad]
-      at (current page.north east) {%
-        \ifthenelse{\boolean{fibeamer@dark}\OR\c@framenumber=0}{%
-          \usebox{\fibeamer@logo@dark}%
-        }{%
-          \usebox{\fibeamer@logo@light}%
-        }%
-      };
-    \end{tikzpicture}}
+  \defbeamertemplate*{headline}{fibeamer}{}
 %    \end{macrocode}
 % The frame title is positioned on the axis of the faculty logo.
 %    \begin{macrocode}
@@ -247,6 +224,13 @@
   \defbeamertemplate*{title page}{fibeamer}{%
     % This is slide 0
     \setcounter{framenumber}{0}
+
+    % Input the university logo
+    \vskip-42pt
+    \IfFileExists{\fibeamer@logo}{%
+      \includegraphics[width=4.66\fibeamer@margin]{\fibeamer@logo}%
+    }{%
+      \includegraphics[width=4.66\fibeamer@margin]{\fibeamer@backupLogo}}
 
     % Input the title
     \usebeamerfont{title}%

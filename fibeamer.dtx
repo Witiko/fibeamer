@@ -164,6 +164,22 @@
 \ExecuteOptionsBeamer{faculty=fi}
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\fibeamer@locale}
+% \subsubsection{The \texttt{locale} option}
+% The \marg{\texttt{locale}=name} pair sets the name of the main
+% locale to \textit{name}. The \textit{name} is stored within the
+% |\fibeamer@locale| macro, whose implicit value is the main
+% language of either the \textsf{babel} or the \textsf{polyglossia}
+% package, or \texttt{english}, when undefined.
+%    \begin{macrocode}
+\def\fibeamer@locale{%
+  % Babel / polyglossia detection
+  \ifx\languagename\undefined%
+  english\else\languagename\fi}
+\DeclareOptionBeamer{locale}{%
+  \def\fibeamer@locale{#1}}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\fibeamer@basePath}
 % \subsection{The \texttt{basePath} option}
 % The \marg{\texttt{basePath}=path} pair sets the \textit{path}
@@ -254,8 +270,8 @@
 % load the faculty logos. The \textit{path} is
 % normalized using the |\fibeamer@subdir| macro and stored
 % within the |\fibeamer@logoPath| macro, whose implicit value
-% is |\fibeamer@basePath| followed by |logo/\fibeamer@university/|. By
-% default, this expands to \texttt{fibeamer/logo/mu/}.
+% is |\fibeamer@basePath| followed by |logo/\fibeamer@university|.
+% By default, this expands to \texttt{fibeamer/logo/mu/}.
 %    \begin{macrocode}
 \DeclareOptionBeamer{logoPath}{%
   \def\fibeamer@logoPath{\fibeamer@subdir#1%
@@ -269,15 +285,22 @@
 % filename of the logo file to be used as the faculty logo to
 % \textit{filename}. The \textit{filename} is stored within the
 % |\fibeamer@logo| macro, whose implicit value is
-% |\fibeamer@logoPath| \texttt{fibeamer-}|\fibeamer@university|%
-% \texttt{-}|\fibeamer@faculty|. By default, this expands to
-% \texttt{fibeamer/logo/mu/fibeamer-mu-fi}. The filenames of the
-% actual files are |\fibeamer@logo|-light and |\fibeamer@logo|-dark,
-% and correspond to the light and dark versions of the given logo.
+% |\fibeamer@logoPath| \texttt{fibeamer-}|\fibeamer@university|^^A
+% \texttt{-}|\fibeamer@faculty|\texttt{.}|\fibeamer@locale|. By
+% default, this expands to \texttt{fibeamer/logo/fibeamer-mu-fi^^A
+% -english}.
+%
+% The \DescribeMacro{\fibeamer@backupLogo}|\fibeamer@backupLogo|
+% macro contains the filename of the logo file to be used, if
+% |\fibeamer@logo| doesn't exist.
 %    \begin{macrocode}
 \DeclareOptionBeamer{logo}{\def\fibeamer@logo{#1}}
 \ExecuteOptionsBeamer{%
-  logo=\fibeamer@logoPath fibeamer-\fibeamer@university-\fibeamer@faculty}
+  logo=\fibeamer@logoPath fibeamer-\fibeamer@university-%
+    \fibeamer@faculty-\fibeamer@locale.pdf}
+\def\fibeamer@backupLogo{%
+  \fibeamer@logoPath fibeamer-\fibeamer@university-%
+    \fibeamer@faculty-english.pdf}
 %    \end{macrocode}
 % \end{macro}
 % \section{Logic}

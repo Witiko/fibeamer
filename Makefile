@@ -1,4 +1,4 @@
-SUBMAKES_REQUIRED=theme/mu logo/mu
+SUBMAKES_REQUIRED=theme/mu
 SUBMAKES_MISCELLANEOUS=guide/mu example/mu
 SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_MISCELLANEOUS)
 .PHONY: all complete clean dist dist-implode implode \
@@ -7,11 +7,10 @@ SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_MISCELLANEOUS)
 BASETHEMEFILE=beamerthemefibeamer.sty
 OTHERTHEMEFILES=theme/mu/*.sty
 THEMEFILES=$(BASETHEMEFILE) $(OTHERTHEMEFILES)
-LOGOSOURCES=logo/mu/*.svg
-LOGOS=logo/mu/*.pdf logo/mu/*.eps
+LOGOS=logo/*/*.pdf
 DTXFILES=*.dtx theme/mu/*.dtx
 INSFILES=*.ins theme/mu/*.ins
-MAKES=guide/mu/Makefile theme/mu/Makefile logo/mu/Makefile Makefile
+MAKES=guide/mu/Makefile theme/mu/Makefile Makefile
 USEREXAMPLES=example/mu/econ-lualatex.pdf \
 	example/mu/econ-pdflatex.pdf example/mu/fi-lualatex.pdf \
 	example/mu/fi-pdflatex.pdf example/mu/fsps-lualatex.pdf \
@@ -22,12 +21,12 @@ USEREXAMPLES=example/mu/econ-lualatex.pdf \
 	example/mu/ped-pdflatex.pdf example/mu/phil-lualatex.pdf \
 	example/mu/phil-pdflatex.pdf example/mu/sci-lualatex.pdf \
 	example/mu/sci-pdflatex.pdf
-DEVEXAMPLES=logo/EXAMPLE/DESCRIPTION logo/mu/DESCRIPTION \
-	logo/DESCRIPTION theme/EXAMPLE/DESCRIPTION theme/mu/DESCRIPTION \
-	theme/DESCRIPTION example/DESCRIPTION example/EXAMPLE/DESCRIPTION \
-	example/mu/DESCRIPTION example/mu/resources/DESCRIPTION \
-	guide/DESCRIPTION guide/EXAMPLE/DESCRIPTION \
-	guide/mu/DESCRIPTION guide/mu/resources/DESCRIPTION
+DEVEXAMPLES=logo/DESCRIPTION theme/EXAMPLE/DESCRIPTION \
+	theme/mu/DESCRIPTION theme/DESCRIPTION example/DESCRIPTION \
+	example/EXAMPLE/DESCRIPTION example/mu/DESCRIPTION \
+	example/mu/resources/DESCRIPTION guide/DESCRIPTION \
+	guide/EXAMPLE/DESCRIPTION guide/mu/DESCRIPTION \
+	guide/mu/resources/DESCRIPTION
 EXAMPLES=$(USEREXAMPLES) $(DEVEXAMPLES)
 MISCELLANEOUS=guide/mu/guide.bib \
 	guide/mu/guide.dtx guide/mu/*.ins guide/mu/resources/cog.pdf \
@@ -99,8 +98,7 @@ $(TDSARCHIVE):
 
 # This target generates a distribution file.
 $(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
-	$(DOCS) $(PDFSOURCES) $(MISCELLANEOUS) $(EXAMPLES) $(VERSION) \
-	$(LOGOSOURCES)
+	$(DOCS) $(PDFSOURCES) $(MISCELLANEOUS) $(EXAMPLES) $(VERSION)
 	DIR=`mktemp -d` && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \
 	cp --parents --verbose $^ "$$DIR" && \
@@ -109,8 +107,7 @@ $(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
 
 # This target generates a CTAN distribution file.
 $(CTANARCHIVE): $(SOURCES) $(MAKES) $(EXAMPLES) \
-	$(MISCELLANEOUS) $(DOCS) $(VERSION) \
-	$(LOGOSOURCES)
+	$(MISCELLANEOUS) $(DOCS) $(VERSION)
 	DIR=`mktemp -d` && mkdir -p "$$DIR/fibeamer" && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \
 	cp --parents --verbose $^ "$$DIR/fibeamer" && \
