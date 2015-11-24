@@ -50,7 +50,7 @@
 \NeedsTeXFormat{LaTeX2e}
 %
 % Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
-\def\fibeamer@version{2015/11/21 v1.0.4 fibeamer MU beamer theme}
+\def\fibeamer@version{2015/11/24 v1.1.0:1-dev fibeamer MU beamer theme}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
 %
 % \iffalse Use `\fibeamer@version` as the PDF creator key.
@@ -58,9 +58,13 @@
 % \fi
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% \changes{v1.0.4} {2015/11/21}{Updated the user guide. [VN]}
-% \changes{v1.0.3} {2015/11/20}{The example documents from the
+% 
+% \changes{v1.1.0:1} {2015/11/24}{Added the new logo files for the
+%   faculties of the Masaryk University in Brno and removed the old
+%   logo files. [VN]}
+% \changes{v1.0.4}   {2015/11/21}{Updated the user guide of the
+%   Masaryk University in Brno. [VN]}
+% \changes{v1.0.3}   {2015/11/20}{The example documents from the
 %   \texttt{example} directory and the user guide from the
 %   \texttt{guide} directory are now a part of the CTAN archive.
 %   [VN]}
@@ -170,7 +174,9 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\fibeamer@locale}
-% \subsubsection{The \texttt{locale} option}
+% \subsection{The \texttt{locale} option}
+% \changes{v1.1.0:1}{2015/11/24}{Added the \texttt{locale} option
+%   and the \cs{fibeamer@locale} macro. [VN]}
 % The \marg{\texttt{locale}=name} pair sets the name of the main
 % locale to \textit{name}. The \textit{name} is stored within the
 % |\fibeamer@locale| macro, whose implicit value is the main
@@ -259,7 +265,7 @@
 % containing the theme files. The \textit{path} is normalized using
 % the |\fibeamer@subdir| macro and stored within the
 % |\fibeamer@stylePath| macro, whose implicit value is
-% |\fibeamer@basepath theme/|. By default, this expands to
+% |\fibeamer@basePath theme/|. By default, this expands to
 % \texttt{fibeamer/theme/}.
 %    \begin{macrocode}
 \DeclareOptionBeamer{themePath}{%
@@ -290,14 +296,25 @@
 % filename of the logo file to be used as the faculty logo to
 % \textit{filename}. The \textit{filename} is stored within the
 % |\fibeamer@logo| macro, whose implicit value is
-% |\fibeamer@logoPath| \texttt{fibeamer-}|\fibeamer@university|^^A
-% \texttt{-}|\fibeamer@faculty|\texttt{.}|\fibeamer@locale|. By
-% default, this expands to \texttt{fibeamer/logo/fibeamer-mu-fi^^A
+% \changes{v1.1.0:1}{2015/11/24}{Changed the implicit value of the
+%   \cs{fibeamer@logo} macro. [VN]}
+% |\fibeamer@logoPath| followed by
+% \texttt{fibeamer-}|\fibeamer@university|\texttt{^^A
+% \discretionary{-}{-}{-}}|\fibeamer@faculty|\texttt{-}^^A
+% |\fibeamer@locale|. By default, this expands to
+% \texttt{fibeamer\discretionary{/}{/}{/}logo/fibeamer-mu-fi^^A
 % -english}.
 %
+% \changes{v1.1.0:1}{2015/11/24}{Added the \cs{fibeamer@backupLogo}
+%   macro. [VN]}
 % The \DescribeMacro{\fibeamer@backupLogo}|\fibeamer@backupLogo|
 % macro contains the filename of the logo file to be used, if
-% |\fibeamer@logo| doesn't exist.
+% |\fibeamer@logo| doesn't exist. The implicit value of the
+% |\fibeamer@backup|\discretionary{-}{}{}|Logo| macro is
+% |\fibeamer@logoPath| followed by \texttt{fibeamer-}^^A
+% |\fibeamer@university|\texttt{\discretionary{-}{-}{-}}^^A
+% |\fibeamer@faculty|\texttt{-english}. By default, this expands to
+% \texttt{fibeamer/logo/fi\-beamer-mu-fi-english}.
 %    \begin{macrocode}
 \DeclareOptionBeamer{logo}{\def\fibeamer@logo{#1}}
 \ExecuteOptionsBeamer{%
