@@ -32,11 +32,14 @@
 %     compound conditionals.
 %   \item\textsf{tikz} -- This package is used to create gradient
 %     background for dark slides.
+%   \item\textsf{etoolbox} -- This package is used for patching
+%     commands using the |\patchcmd| macro.
 % \end{itemize}
 %    \begin{macrocode}
   \RequirePackage{listings}
   \RequirePackage{ifthen}
   \RequirePackage{tikz}
+  \RequirePackage{etoolbox}
 %    \end{macrocode}
 % \begin{macro}{\iffibeamer@dark}
 % The |\iffibeamer@dark| conditional will be switched on and off by
@@ -230,10 +233,18 @@
 
     % Input the university logo
     \vskip-42pt
-    \IfFileExists{\fibeamer@logo}{%
-      \includegraphics[width=4.66\fibeamer@margin]{\fibeamer@logo}%
-    }{%
-      \includegraphics[width=4.66\fibeamer@margin]{\fibeamer@fallbackLogo}}
+    \begingroup
+      \def\@options{}
+      % See <http://tex.stackexchange.com/a/39987/70941>.
+			\patchcmd{\Gin@ii}% Make \includegraphics use @fallbackLogo.
+				{\begingroup}% <search>
+				{\begingroup\renewcommand{\@latex@error}[2]{%
+           \includegraphics[width=4.66\fibeamer@margin]%
+             \fibeamer@fallbackLogo}}% <replace>
+				{}% <success>
+				{}% <failure>
+      \includegraphics[width=4.66\fibeamer@margin]\fibeamer@logo
+    \endgroup
 
     % Input the title
     \usebeamerfont{title}%

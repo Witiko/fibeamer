@@ -182,6 +182,10 @@
 % |\fibeamer@locale| macro, whose implicit value is the main
 % language of either the \textsf{babel} or the \textsf{polyglossia}
 % package, or \texttt{english}, when undefined.
+%
+% As far as the themes of the Masaryk University in Brno go, the
+% |\fibeamer@locale| macro is not used; it only provides the
+% default value to the |\fibeamer@logoLocale| macro.
 %    \begin{macrocode}
 \def\fibeamer@locale{%
   % Babel / polyglossia detection
@@ -334,10 +338,10 @@
 \DeclareOptionBeamer{logo}{\def\fibeamer@logo{#1}}
 \ExecuteOptionsBeamer{%
   logo=\fibeamer@logoPath fibeamer-\fibeamer@university-%
-    \fibeamer@faculty-\fibeamer@logoLocale.pdf}
+    \fibeamer@faculty-\fibeamer@logoLocale}
 \def\fibeamer@fallbackLogo{%
   \fibeamer@logoPath fibeamer-\fibeamer@university-%
-    \fibeamer@faculty-english.pdf}
+    \fibeamer@faculty-english}
 %    \end{macrocode}
 % \end{macro}
 % \section{Logic}
