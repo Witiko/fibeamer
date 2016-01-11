@@ -50,7 +50,7 @@
 \NeedsTeXFormat{LaTeX2e}
 %
 % Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
-\def\fibeamer@version{2016/01/11 v1.1.0:4-dev fibeamer MU beamer theme}
+\def\fibeamer@version{2016/01/11 v1.1.0:5-dev fibeamer MU beamer theme}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
 %
 % \iffalse Use `\fibeamer@version` as the PDF creator key.
@@ -116,7 +116,7 @@
 %    \end{macrocode}
 % \subsection{The \texttt{microtype} option}
 % \changes{v1.0.2}{2015/11/18}{Added the opt-out \texttt{microtype
-% option}. [VN]}
+%   option}. [VN]}
 % \begin{macro}{\iffibeamer@microtype}
 % The |microtype| option instructs the package to use the
 % microtypographic extensions of modern \TeX\ engines, such as
@@ -384,6 +384,27 @@
     /beamer#1themefibeamer-\fibeamer@university}
   \fibeamer@require{\fibeamer@themePath\fibeamer@university%
     /beamer#1themefibeamer-\fibeamer@university-\fibeamer@faculty}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@includeLogo}
+% \changes{v1.1.0:5}{2016/01/11}{Added the
+%   \cs{fibeamer@includeLogo} macro. [VN]}
+% The |\fibeamer@includeLogo|\oarg{options} macro includes the
+% main logo into the document. If specified, the \textit{options}
+% are passed to the |\includegraphics| macro.  The
+% |\fibeamer@includeLogo| macro requires the \textsf{etoolbox}
+% package to function.
+%    \begin{macrocode}
+\fibeamer@require{etoolbox}
+\newcommand\fibeamer@includeLogo[1][]{{
+  % See <http://tex.stackexchange.com/a/39987/70941>.
+  \patchcmd{\Gin@ii}% Make `\includegraphics` use `@fallbackLogo`.
+    {\begingroup}% <search>
+    {\begingroup\renewcommand{\@latex@error}[2]{%
+       \includegraphics[#1]\fibeamer@fallbackLogo}}% <replace>
+    {}% <success>
+    {}% <failure>
+  \includegraphics[#1]\fibeamer@logo}}
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Main routine}

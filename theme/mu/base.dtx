@@ -32,14 +32,11 @@
 %     compound conditionals.
 %   \item\textsf{tikz} -- This package is used to create gradient
 %     background for dark slides.
-%   \item\textsf{etoolbox} -- This package is used for patching
-%     commands using the |\patchcmd| macro.
 % \end{itemize}
 %    \begin{macrocode}
   \RequirePackage{listings}
   \RequirePackage{ifthen}
   \RequirePackage{tikz}
-  \RequirePackage{etoolbox}
 %    \end{macrocode}
 % \begin{macro}{\iffibeamer@dark}
 % The |\iffibeamer@dark| conditional will be switched on and off by
@@ -62,8 +59,8 @@
     \boolean{fibeamer@dark} \OR \c@framenumber=0
   }{%
     \begin{tikzpicture}
-      \clip (0,\fibeamer@clipbottom) rectangle
-        (\paperwidth,\fibeamer@cliptop);
+      \clip (0,\fibeamer@lengths@clipbottom) rectangle
+        (\paperwidth,\fibeamer@lengths@cliptop);
       \path [inner color = fibeamer@backgroundInner,
              outer color = fibeamer@backgroundOuter]
         (0,0) rectangle (\paperwidth,\paperwidth);
@@ -157,28 +154,41 @@
 %   the dimensions of the (now unused) logo in the upper right
 %   corner. [VN]}
 %    \begin{macrocode}
-  \newlength\fibeamer@baseUnit
-  \fibeamer@baseUnit=3.75mm
+  \newlength\fibeamer@lengths@baseunit
+  \fibeamer@lengths@baseunit=3.75mm
   % The footer padding
-  \newlength\fibeamer@footerpad
-  \setlength\fibeamer@footerpad{\fibeamer@baseUnit}
+  \newlength\fibeamer@lengths@footerpad
+  \setlength\fibeamer@lengths@footerpad{%
+    \fibeamer@lengths@baseunit}
   % The side margins
-  \newlength\fibeamer@margin
-  \setlength\fibeamer@margin{3\fibeamer@baseUnit}
+  \newlength\fibeamer@lengths@margin
+  \setlength\fibeamer@lengths@margin{%
+    3\fibeamer@lengths@baseunit}
   \setbeamersize{
-    text margin left=\fibeamer@margin,
-    text margin right=\fibeamer@margin}
+    text margin left=\fibeamer@lengths@margin,
+    text margin right=\fibeamer@lengths@margin}
   % The upper margin
-  \newlength\fibeamer@titleline
-  \setlength\fibeamer@titleline{3\fibeamer@baseUnit}
+  \newlength\fibeamer@lengths@titleline
+  \setlength\fibeamer@lengths@titleline{%
+    3\fibeamer@lengths@baseunit}
   % The background clipping
-  \newlength\fibeamer@clipbottom
-  \setlength\fibeamer@clipbottom\paperwidth
-  \addtolength\fibeamer@clipbottom{-\paperheight}
-  \setlength\fibeamer@clipbottom{0.5\fibeamer@clipbottom}
-  \newlength\fibeamer@cliptop
-  \setlength\fibeamer@cliptop\paperwidth
-  \addtolength\fibeamer@cliptop{-\fibeamer@clipbottom}
+  \newlength\fibeamer@lengths@clipbottom
+  \setlength\fibeamer@lengths@clipbottom\paperwidth
+  \addtolength\fibeamer@lengths@clipbottom{-\paperheight}
+  \setlength\fibeamer@lengths@clipbottom{%
+    0.5\fibeamer@lengths@clipbottom}
+  \newlength\fibeamer@lengths@cliptop
+  \setlength\fibeamer@lengths@cliptop\paperwidth
+  \addtolength\fibeamer@lengths@cliptop{%
+    -\fibeamer@lengths@clipbottom}
+%    \end{macrocode}
+% \changes{v1.1.0:5}{2016/01/11}{Added the logo dimension
+%   definitions. [VN]}
+%    \begin{macrocode}
+  % The logo width
+  \newlength\fibeamer@lengths@logowidth
+  \setlength\fibeamer@lengths@logowidth{%
+    14\fibeamer@lengths@baseunit}
 %    \end{macrocode}
 % The outer theme completely culls the bottom navigation.
 %    \begin{macrocode}
@@ -195,7 +205,7 @@
 %    \begin{macrocode}
   \defbeamertemplate*{frametitle}{fibeamer}{%
     \vskip-1em % Align the text with the top border
-    \vskip\fibeamer@titleline
+    \vskip\fibeamer@lengths@titleline
     \usebeamercolor[fg]{frametitle}%
     \usebeamerfont{frametitle}%
       \insertframetitle\par%
@@ -208,12 +218,13 @@
   \defbeamertemplate*{footline}{fibeamer}{%
     \ifnum\c@framenumber=0\else%
       \begin{tikzpicture}[overlay]
-        \node[anchor=south east,yshift=\fibeamer@footerpad,
-          xshift=-\fibeamer@footerpad] at (current page.south east) {
-          \usebeamercolor[fg]{framenumber}%
-          \usebeamerfont{framenumber}%
-          \insertframenumber/\inserttotalframenumber
-        };
+        \node[anchor=south east,
+          yshift=\fibeamer@lengths@footerpad,
+          xshift=-\fibeamer@lengths@footerpad] at
+          (current page.south east) {
+            \usebeamercolor[fg]{framenumber}%
+            \usebeamerfont{framenumber}%
+            \insertframenumber/\inserttotalframenumber};
       \end{tikzpicture}
     \fi}
 %    \end{macrocode}
@@ -228,18 +239,7 @@
 
     % Input the university logo
     \vskip-42pt
-    \begingroup
-      \def\@options{}
-      % See <http://tex.stackexchange.com/a/39987/70941>.
-			\patchcmd{\Gin@ii}% Make \includegraphics use @fallbackLogo.
-				{\begingroup}% <search>
-				{\begingroup\renewcommand{\@latex@error}[2]{%
-           \includegraphics[width=4.66\fibeamer@margin]%
-             \fibeamer@fallbackLogo}}% <replace>
-				{}% <success>
-				{}% <failure>
-      \includegraphics[width=4.66\fibeamer@margin]\fibeamer@logo
-    \endgroup
+    \fibeamer@includeLogo[width=\fibeamer@lengths@logowidth]
 
     % Input the title
     \usebeamerfont{title}%
