@@ -101,11 +101,34 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamerinnerthemefibeamer-mu}[2015/08/26]
+  beamerinnerthemefibeamer-mu}[2016/01/11]
+\mode<presentation>
 \defbeamertemplate*{itemize item}{fibeamer}{$\bullet$}
 \defbeamertemplate*{itemize subitem}{fibeamer}{\---}
 \defbeamertemplate*{itemize subsubitem}{fibeamer}{\guillemotright}
 \setbeamertemplate{bibliography item}{\insertbiblabel}
+%    \end{macrocode}
+% \changes{v1.1.0:6}{2016/01/11}{Added support for the
+%   \cs{tableofcontents}. [VN]}
+%    \begin{macrocode}
+\setbeamertemplate{section in toc}{%
+  {\usebeamercolor[fg]{item}%
+    \inserttocsectionnumber.}%
+  \kern1.25ex\inserttocsection\par}
+\setbeamertemplate{subsection in toc}{%
+  \hspace\leftmargini
+  {\usebeamercolor[fg]{item}%
+    \inserttocsectionnumber.\inserttocsubsectionnumber}%
+  \kern1.25ex\inserttocsubsection\par}
+\setbeamertemplate{subsubsection in toc}{%
+  \hspace\leftmargini
+  \hspace\leftmarginii
+  {\usebeamercolor[fg]{item}%
+    \inserttocsectionnumber.\inserttocsubsectionnumber.%
+    \inserttocsubsubsectionnumber}%
+  \kern1.25ex\inserttocsubsubsection\par}
+\mode
+<all>
 %    \end{macrocode}
 % \iffalse
 %</inner>
@@ -182,13 +205,16 @@
   \addtolength\fibeamer@lengths@cliptop{%
     -\fibeamer@lengths@clipbottom}
 %    \end{macrocode}
-% \changes{v1.1.0:5}{2016/01/11}{Added the logo dimension
+% \changes{v1.1.0:6}{2016/01/11}{Added the logo dimension
 %   definitions. [VN]}
 %    \begin{macrocode}
-  % The logo width
+  % The logo size
   \newlength\fibeamer@lengths@logowidth
   \setlength\fibeamer@lengths@logowidth{%
     14\fibeamer@lengths@baseunit}
+  \newlength\fibeamer@lengths@logoheight
+  \setlength\fibeamer@lengths@logoheight{%
+    0.4\fibeamer@lengths@logowidth}
 %    \end{macrocode}
 % The outer theme completely culls the bottom navigation.
 %    \begin{macrocode}
@@ -238,8 +264,18 @@
     \setcounter{framenumber}{0}
 
     % Input the university logo
-    \vskip-42pt
-    \fibeamer@includeLogo[width=\fibeamer@lengths@logowidth]
+    \begin{tikzpicture}[
+      remember picture,
+      overlay,
+      xshift=0.5\fibeamer@lengths@logowidth,
+      yshift=0.5\fibeamer@lengths@logoheight
+    ]
+      \node at (0,0) {
+        \fibeamer@includeLogo[
+          width=\fibeamer@lengths@logowidth,
+          height=\fibeamer@lengths@logoheight
+        ]};
+    \end{tikzpicture}
 
     % Input the title
     \usebeamerfont{title}%

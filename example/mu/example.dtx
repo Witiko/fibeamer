@@ -77,6 +77,15 @@
 \frenchspacing
 \begin{document}
   \frame{\maketitle}
+  
+  \AtBeginSection[]{% Print an outline at the beginning of sections
+    \begin{frame}<beamer>
+      \frametitle{Outline for Section \thesection}
+      \tableofcontents[currentsection]
+    \end{frame}}
+
+  \section{Light Frames}
+  \subsection{Blind Text}
   \begin{frame}{Jabberwocky}
     \framesubtitle{Lewis Carroll}%
     \begin{tikzpicture}[overlay,remember picture]
@@ -95,7 +104,7 @@
     Beware the Jubjub bird, and shun\\
     The frumious Bandersnatch!”\\
   \end{frame}
-  
+ 
   \begin{frame}[label=lists]{Lists and locales}
     \framesubtitle{Lorem ipsum dolor sit amet}
     \begin{columns}[onlytextwidth]
@@ -128,7 +137,8 @@
     flock by when MTV ax quiz prog. “Now fax quiz Jack!”}}
   \end{frame}
 
-  \begin{frame}[label=simmonshall]{Blocks, pads and boxes}
+  \subsection{Structuring Elements}
+  \begin{frame}[label=simmonshall]{Blocks, pads, and boxes}
     \framesubtitle{In plain, example and alert flavour}
     \begin{block}{Observation 1}
       Simmons Hall is composed of metal and concrete.
@@ -141,7 +151,7 @@
     \end{alertblock}
   \end{frame}
 
-  \begin{frame}[label=proof]{Definitions, theorems and proofs}
+  \begin{frame}[label=proof]{Definitions, theorems, and proofs}
     \framesubtitle{All integers divide zero}
     \begin{definition}
       $\forall a,b\in\mathds{Z}: a\mid b\iff\exists c\in\mathds{Z}:a\cdot c=b$ 
@@ -154,8 +164,9 @@
     \end{proof}
   \end{frame}
 
+  \subsection{Numerals and Mathematics}
   \begin{frame}[label=math]{Numerals and Mathematics}
-    \framesubtitle{Formulae, equations and expressions}
+    \framesubtitle{Formulae, equations, and expressions}
     \begin{columns}[onlytextwidth]
       \column{.20\textwidth}
         1234567890
@@ -201,8 +212,9 @@
     \end{columns}
   \end{frame}
 
+  \subsection{Figures and Code Listings}
   \begin{frame}[label=figs1]{Figures}
-    \framesubtitle{Tables, graphs and images}
+    \framesubtitle{Tables, graphs, and images}
     \begin{table}[!b]
       {\carlitoTLF % Use monospaced lining figures
       \begin{tabularx}{\textwidth}{Xrrr}
@@ -233,7 +245,7 @@
     \end{table}
   \end{frame}
   \begin{frame}[label=figs2]{Figures}
-    \framesubtitle{Tables, graphs and images}
+    \framesubtitle{Tables, graphs, and images}
     \begin{figure}[b]
       \centering
       % Flipping a coin
@@ -315,29 +327,58 @@ int main(int argc, char **argv)
     \sleepSort
   \end{frame}
 
-  \begin{frame}[label=bib]{Bibliography}
+  \subsection{Citations and Bibliography}
+  \begin{frame}[label=citations]{Citations}
+    \framesubtitle{\TeX, \LaTeX, and Beamer}
+
+    \TeX\ is a programming language for the typesetting of
+    documents. \TeX\ was created by Donald Erwin Knuth in the late
+    1970s and is documented in \emph{The \TeX book}~\cite{knuth84}.
+    
+    In the early 1980s, Leslie Lamport finished the initial version
+    of \LaTeX\ -- a high-level macro language on top of \TeX.
+    \LaTeX\ is thoroughly documented in \emph{\LaTeX : A Document
+    Preparation System}~\cite{lamport94}.  Since \LaTeX\ is
+    modular, there exists a healthy ecosystem of macro packages
+    that extend its core functionality; \emph{A LaTeX
+    Companion}~\cite{MG94} is a comprehensive guide through the
+    ecosystem.
+
+    In 2003, Till Tantau released the initial version of Beamer --
+    a \LaTeX\ macro package for the creation of presentations.
+    Beamer is documented in the \emph{User's Guide to the Beamer
+    Class}~\cite{tantau04}.
+  \end{frame}
+
+  \begin{frame}[label=bibliography]{Bibliography}
+    \framesubtitle{\TeX, \LaTeX, and Beamer}
     \begin{thebibliography}{9}
-      \bibitem{texbook}
-          Donald~E. Knuth.
-          \textit{The \TeX book}.
+      \bibitem{knuth84}
+          Donald~E.~Knuth.
+          \emph{The \TeX book}.
           Addison-Wesley, 1984.
-      \bibitem{latex}
-          Leslie Lamport.
-          \textit{\LaTeX : A Document Preparation System}.
+      \bibitem{lamport94}
+          Leslie~Lamport.
+          \emph{\LaTeX : A Document Preparation System}.
           Addison-Wesley, 1986.
-      \bibitem{chicago}
-          \textit{The Chicago Manual of Style},
-          pages 400--401.
-          University of Chicago Press, thirteenth edition, 1982.
-      \bibitem{Boney96} Boney, L., Tewfik, A.H., and Hamdy, K.N., “Digital
-          Watermarks for Audio Signals,” \textit{Proceedings of the Third IEEE
-          International Conference on Multimedia}, pp. 473-480, June 1996.
-      \bibitem{MG} Goossens, M., Mittelbach, F., Samarin, \textit{A LaTeX
-          Companion}, Addison-Wesley, Reading, MA, 1994.
-      \end{thebibliography}
+      \bibitem{MG94}
+          M.~Goossens, F.~Mittelbach, and A.~Samarin.
+          \emph{A LaTeX Companion}.
+          Addison-Wesley, 1994.
+      \bibitem{tantau04}
+          Till~Tantau.
+          \emph{User's Guide to the Beamer Class Version 3.01}.
+          Available at \url{http://latex-beamer.sourceforge.net}.
+      \bibitem{wiedmann14}
+          Michael~Wiedmann.
+          \emph{Tools for Creating Screen or Online Presentations}.
+          Available at \url{http://miwie.org/presentations}.
+    \end{thebibliography}
   \end{frame}
 
   \begin{darkframes}
+    \section{Dark Frames}
+    \subsection{Blind Text}
     \begin{frame}{Jabberwocky}
       \framesubtitle{Lewis Carroll}%
       \begin{tikzpicture}[overlay,remember picture]
@@ -356,10 +397,13 @@ int main(int argc, char **argv)
       Beware the Jubjub bird, and shun\\
       The frumious Bandersnatch!”\\
     \end{frame}
+    \subsection{Structuring Elements}
     \againframe{lists}
     \againframe{simmonshall}
     \againframe{proof}
+    \subsection{Numerals and Mathematics}
     \againframe{math}
+    \subsection{Figures and Code Listings}
     \againframe{figs1}
     \againframe{figs2}
     \defverbatim[colored]\sleepSort{
@@ -382,7 +426,9 @@ int main(int argc, char **argv)
   \begin{frame}{Code listings}{An example source code in C}
       \sleepSort
     \end{frame}
-    \againframe{bib}
+    \subsection{Citations and Bibliography}
+    \againframe{citations}
+    \againframe{bibliography}
   \end{darkframes}
 \end{document}
 %    \end{macrocode}
