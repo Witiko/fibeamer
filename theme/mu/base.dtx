@@ -152,37 +152,32 @@
 %    \end{macrocode}
 % This part of the outer theme defines the geometry of the frames
 % along with other dimensions.
+% \changes{v1.1.0:4}{2016/01/11}{Length definitions within the
+%   themes of the Masaryk University in Brno are no longer based on
+%   the dimensions of the (now unused) logo in the upper right
+%   corner. [VN]}
 %    \begin{macrocode}
-  % The dimensions of an imaginary logo in the upper right corner
-  \newlength{\fibeamer@logowidth}
-  \setlength{\fibeamer@logowidth}{15mm}
-  \newlength{\fibeamer@logoheight}
-  \setlength{\fibeamer@logoheight}{1.32\fibeamer@logowidth}
-  % The logo padding
-  \newlength{\fibeamer@logopad}
-  \setlength{\fibeamer@logopad}{0.25\fibeamer@logowidth}
+  \newlength\fibeamer@baseUnit
+  \fibeamer@baseUnit=3.75mm
   % The footer padding
-  \newlength{\fibeamer@footerpad}
-  \setlength{\fibeamer@footerpad}{\fibeamer@logopad}
+  \newlength\fibeamer@footerpad
+  \setlength\fibeamer@footerpad{\fibeamer@baseUnit}
   % The side margins
-  \newlength{\fibeamer@margin}
-  \setlength{\fibeamer@margin}{\fibeamer@logopad}
-  \addtolength\fibeamer@margin{0.5\fibeamer@logowidth}
+  \newlength\fibeamer@margin
+  \setlength\fibeamer@margin{3\fibeamer@baseUnit}
   \setbeamersize{
     text margin left=\fibeamer@margin,
     text margin right=\fibeamer@margin}
   % The upper margin
-  \newlength{\fibeamer@titleline}
-  \setlength{\fibeamer@titleline}{0.5\fibeamer@logoheight}
-  \usebeamerfont{frametitle}%
-  \addtolength\fibeamer@titleline{-1em}
+  \newlength\fibeamer@titleline
+  \setlength\fibeamer@titleline{3\fibeamer@baseUnit}
   % The background clipping
-  \newlength{\fibeamer@clipbottom}
-  \setlength{\fibeamer@clipbottom}{\paperwidth}
+  \newlength\fibeamer@clipbottom
+  \setlength\fibeamer@clipbottom\paperwidth
   \addtolength\fibeamer@clipbottom{-\paperheight}
-  \setlength{\fibeamer@clipbottom}{0.5\fibeamer@clipbottom}
-  \newlength{\fibeamer@cliptop}
-  \setlength{\fibeamer@cliptop}{\paperwidth}
+  \setlength\fibeamer@clipbottom{0.5\fibeamer@clipbottom}
+  \newlength\fibeamer@cliptop
+  \setlength\fibeamer@cliptop\paperwidth
   \addtolength\fibeamer@cliptop{-\fibeamer@clipbottom}
 %    \end{macrocode}
 % The outer theme completely culls the bottom navigation.
@@ -196,9 +191,10 @@
 %    \begin{macrocode}
   \defbeamertemplate*{headline}{fibeamer}{}
 %    \end{macrocode}
-% The frame title is positioned on the axis of the faculty logo.
+% The frame title.
 %    \begin{macrocode}
   \defbeamertemplate*{frametitle}{fibeamer}{%
+    \vskip-1em % Align the text with the top border
     \vskip\fibeamer@titleline
     \usebeamercolor[fg]{frametitle}%
     \usebeamerfont{frametitle}%
@@ -207,8 +203,7 @@
     \usebeamerfont{framesubtitle}%
       \insertframesubtitle}
 %    \end{macrocode}
-% The footline contains the frame number. It is flushed right and
-% aligned with the faculty logo.
+% The footline contains the frame number. It is flushed right.
 %    \begin{macrocode}
   \defbeamertemplate*{footline}{fibeamer}{%
     \ifnum\c@framenumber=0\else%
