@@ -66,7 +66,7 @@
 \subtitle{Presentation Subtitle} %% title page.
 \author{Author's Name}
 %% These additional packages are used within the document:
-\usepackage{ragged2e}  % `\justify` text
+\usepackage{ragged2e}  % `\justifying` text
 \usepackage{booktabs}  % Tables
 \usepackage{tabularx}
 \usepackage{tikz}      % Diagrams
@@ -129,12 +129,16 @@
           \end{enumerate}
         \end{enumerate}
     \end{columns}
-    \justify{{\uselanguage{czech}Nechť již hříšné saxofony ďáblů rozzvučí síň
-    úděsnými tóny waltzu, tanga a quickstepu!}{\uselanguage{slovak}
-    Nezvyčajné kŕdle šťastných figliarskych ďatľov učia pri kótovanom ústí
-    Váhu mĺkveho koňa Waldemara obžierať väč\-šie kusy exkluzívnej kôry.}
-    {\uselanguage{english}The quick, brown fox jumps over a lazy dog. DJs
-    flock by when MTV ax quiz prog. “Now fax quiz Jack!”}}
+    \bigskip
+    \justifying
+
+    {\uselanguage{czech}Nechť již hříšné saxofony ďáblů
+    rozzvučí síň úděsnými tóny waltzu, tanga a quickstepu!}
+    {\uselanguage{slovak} Nezvyčajné kŕdle šťastných figliarskych
+    ďatľov učia pri kótovanom ústí Váhu mĺkveho koňa Waldemara
+    obžierať väč\-šie kusy exkluzívnej kôry.}
+    {\uselanguage{english}The quick, brown fox jumps over a lazy
+    dog. DJs flock by when MTV ax quiz prog. “Now fax quiz Jack!”}
   \end{frame}
 
   \subsection{Structuring Elements}
@@ -334,23 +338,22 @@ int main(int argc, char **argv)
   \begin{frame}[label=citations]{Citations}
     \framesubtitle{\TeX, \LaTeX, and Beamer}
 
-    \TeX\ is a programming language for the typesetting of
-    documents. It was created by Donald Erwin Knuth in the late
+    \justifying\TeX\ is a programming language for the typesetting
+    of documents. It was created by Donald Erwin Knuth in the late
     1970s and it is documented in \emph{The \TeX
     book}~\cite{knuth84}.
     
-    In the early 1980s, Leslie Lamport finished the initial version
-    of \LaTeX\ -- a high-level macro language on top of \TeX.
-    \LaTeX\ is thoroughly documented in \emph{\LaTeX : A Document
-    Preparation System}~\cite{lamport94}.  Since \LaTeX\ is
-    modular, there exists a large ecosystem of macro packages
-    that extend its core functionality; \emph{A LaTeX
-    Companion}~\cite{MG94} is a comprehensive guide through the
-    ecosystem.
+    In the early 1980s, Leslie Lamport created the initial version
+    of \LaTeX, a high-level language on top of \TeX, which is
+    documented in \emph{\LaTeX : A Document Preparation
+    System}~\cite{lamport94}. There exists a healthy ecosystem of
+    packages that extend the base functionality of \LaTeX;
+    \emph{The \LaTeX\ Companion}~\cite{MG94} acts as a guide
+    through the ecosystem.
 
-    In 2003, Till Tantau released the initial version of Beamer --
-    a \LaTeX\ macro package for the creation of presentations.
-    Beamer is documented in the \emph{User's Guide to the Beamer
+    In 2003, Till Tantau created the initial version of Beamer, a
+    \LaTeX\ package for the creation of presentations. Beamer is
+    documented in the \emph{User's Guide to the Beamer
     Class}~\cite{tantau04}.
   \end{frame}
 
@@ -367,7 +370,7 @@ int main(int argc, char **argv)
           Addison-Wesley, 1986.
       \bibitem{MG94}
           M.~Goossens, F.~Mittelbach, and A.~Samarin.
-          \emph{A LaTeX Companion}.
+          \emph{The \LaTeX\ Companion}.
           Addison-Wesley, 1994.
       \bibitem{tantau04}
           Till~Tantau.
