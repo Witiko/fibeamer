@@ -48,9 +48,14 @@
 %    \end{macrocode}
 %<*class>
 \NeedsTeXFormat{LaTeX2e}
+%
 % Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
 \def\fibeamer@version{2015/11/21 v1.0.4 fibeamer MU beamer theme}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
+%
+% \iffalse Use `\fibeamer@version` as the PDF creator key.
+\hypersetup{pdfcreator=\fibeamer@version}
+% \fi
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
