@@ -6,7 +6,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamercolorthemefibeamer-mu}[2015/08/26]
+  beamercolorthemefibeamer-mu}[2016/01/12]
 %    \end{macrocode}
 % \begin{macro}{\darkframes}
 % The |darkframes| environment switches the color definitions to
@@ -79,7 +79,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamerfontthemefibeamer-mu}[2015/08/26]
+  beamerfontthemefibeamer-mu}[2016/01/12]
 \mode<presentation>
   \setbeamerfont{normal text}{size=\normalsize}
   \setbeamerfont{title}{size=\LARGE, series=\bfseries}
@@ -101,7 +101,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamerinnerthemefibeamer-mu}[2016/01/11]
+  beamerinnerthemefibeamer-mu}[2016/01/12]
 \mode<presentation>
 \defbeamertemplate*{itemize item}{fibeamer}{$\bullet$}
 \defbeamertemplate*{itemize subitem}{fibeamer}{\---}
@@ -112,20 +112,23 @@
 %   \cs{tableofcontents}. [VN]}
 %    \begin{macrocode}
 \setbeamertemplate{section in toc}{%
-  {\usebeamercolor[fg]{item}%
-    \inserttocsectionnumber.}%
+  \usebeamercolor[fg]{item}%
+    \inserttocsectionnumber.%
+  \usebeamercolor[fg]{structure}%
   \kern1.25ex\inserttocsection\par}
 \setbeamertemplate{subsection in toc}{%
   \hspace\leftmargini
-  {\usebeamercolor[fg]{item}%
-    \inserttocsectionnumber.\inserttocsubsectionnumber}%
+  \usebeamercolor[fg]{item}%
+    \inserttocsectionnumber.\inserttocsubsectionnumber%
+  \usebeamercolor[fg]{structure}%
   \kern1.25ex\inserttocsubsection\par}
 \setbeamertemplate{subsubsection in toc}{%
   \hspace\leftmargini
   \hspace\leftmarginii
-  {\usebeamercolor[fg]{item}%
+  \usebeamercolor[fg]{item}%
     \inserttocsectionnumber.\inserttocsubsectionnumber.%
-    \inserttocsubsubsectionnumber}%
+    \inserttocsubsubsectionnumber%
+  \usebeamercolor[fg]{structure}%
   \kern1.25ex\inserttocsubsubsection\par}
 \mode
 <all>
@@ -140,7 +143,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamerouterthemefibeamer-mu}[2016/01/11]
+  beamerouterthemefibeamer-mu}[2016/01/12]
 \mode<presentation>
 %    \end{macrocode}
 % The theme uses the following packages:

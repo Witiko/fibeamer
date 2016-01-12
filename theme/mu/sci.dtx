@@ -5,7 +5,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamercolorthemefibeamer-mu-sci}[2016/01/11]
+  beamercolorthemefibeamer-mu-sci}[2016/01/12]
 \mode<presentation>
 %    \end{macrocode}
 % This color theme uses the combination of green, gray and
@@ -17,6 +17,7 @@
 %    \begin{macrocode}
   \definecolor{fibeamer@green}{HTML}{139632}
   \definecolor{fibeamer@gray}{HTML}{999999}
+  \definecolor{fibeamer@brightGreen}{HTML}{2ECE0F}
   \colorlet{fibeamer@backgroundInner}{fibeamer@green!90!black}
   \colorlet{fibeamer@backgroundOuter}{fibeamer@green!60!black}
 %    \end{macrocode}
@@ -27,14 +28,19 @@
     \begingroup
       \fibeamer@darktrue
       %% Structures
-      \setbeamercolor*{structure}{fg=white, bg=fibeamer@green}
-      \setbeamercolor*{frametitle}{fg=fibeamer@green!25!white}
+      \setbeamercolor*{frametitle}{fg=fibeamer@green!30!white}
       \setbeamercolor*{framesubtitle}{fg=white}
       %% Text
       \setbeamercolor*{normal text}{fg=white, bg=fibeamer@green}
+      \setbeamercolor*{structure}{fg=white, bg=fibeamer@green}
+%    \end{macrocode}
+% \changes{v1.1.0:7}{2016/01/12}{Added support for \cs{alert}. [VN]}
+%    \begin{macrocode}
+      \setbeamercolor*{alerted text}{%
+        fg=fibeamer@brightGreen!75!white}
       %% Items
-      \setbeamercolor*{item}{fg=fibeamer@green!25!white}
-      \setbeamercolor{footnote mark}{fg=fibeamer@green!25!white}
+      \setbeamercolor*{item}{fg=fibeamer@green!30!white}
+      \setbeamercolor*{footnote mark}{fg=fibeamer@green!30!white}
       %% Blocks
       \setbeamercolor*{block title}{
         use=structure, fg=white, bg=fibeamer@green!60!white}
@@ -48,20 +54,30 @@
       \usebeamercolor*{normal text}
       % Code listings
       \lstset{
-        commentstyle=\color{green!25!white},
-        keywordstyle=\color{blue!25!white},
-        stringstyle=\color{red!25!white}}
+        commentstyle=\color{green!30!white},
+        keywordstyle=\color{blue!30!white},
+        stringstyle=\color{red!30!white}}
       }{%
     \endgroup}
 %    \end{macrocode}
 % Outside the |darkframes| environment, the light theme is used.
 %    \begin{macrocode}
   %% Structures
-  \setbeamercolor{structure}{fg=black!75!white, bg=white}
   \setbeamercolor{frametitle}{fg=fibeamer@green}
   \setbeamercolor{framesubtitle}{fg=black!75!white}
   %% Text
-  \setbeamercolor{normal text}{fg=black}
+  \setbeamercolor{normal text}{fg=black, bg=white}
+  \setbeamercolor{structure}{fg=black, bg=white}
+%    \end{macrocode}
+% \changes{v1.1.0:7}{2016/01/12}{Added support for \cs{alert}. [VN]}
+%    \begin{macrocode}
+  \setbeamercolor{alerted text}{fg=fibeamer@brightGreen}
+  \addtobeamertemplate{block begin}{%
+    \iffibeamer@dark % alerted text in plain block at dark slides
+      \setbeamercolor{alerted text}{fg=fibeamer@brightGreen!90!white}%
+    \else % alerted text in plain block at light slides
+      \setbeamercolor{alerted text}{fg=fibeamer@brightGreen!80!white}%
+    \fi}{}
   %% Items
   \setbeamercolor{item}{fg=fibeamer@green}
   \setbeamercolor{footnote mark}{fg=fibeamer@green}

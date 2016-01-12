@@ -5,7 +5,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamercolorthemefibeamer-mu-econ}[2016/01/11]
+  beamercolorthemefibeamer-mu-econ}[2016/01/12]
 \mode<presentation>
 %    \end{macrocode}
 % This color theme uses the combination of red-brown, gray and
@@ -15,7 +15,7 @@
 % Masaryk University and which draws the gradient background of
 % dark frames.
 %    \begin{macrocode}
-  \definecolor{fibeamer@brown}{HTML}{6e222c}
+  \definecolor{fibeamer@brown}{HTML}{892840}
   \definecolor{fibeamer@gray}{HTML}{999999}
   \colorlet{fibeamer@backgroundInner}{fibeamer@brown}
   \colorlet{fibeamer@backgroundOuter}{fibeamer@brown!60!black}
@@ -27,14 +27,18 @@
     \begingroup
       \fibeamer@darktrue
       %% Structures
-      \setbeamercolor*{structure}{fg=white, bg=fibeamer@brown}
-      \setbeamercolor*{frametitle}{fg=fibeamer@brown!25!white}
+      \setbeamercolor*{frametitle}{fg=fibeamer@brown!30!white}
       \setbeamercolor*{framesubtitle}{fg=white}
       %% Text
       \setbeamercolor*{normal text}{fg=white, bg=fibeamer@brown}
+      \setbeamercolor*{structure}{fg=white, bg=fibeamer@brown}
+%    \end{macrocode}
+% \changes{v1.1.0:7}{2016/01/12}{Added support for \cs{alert}. [VN]}
+%    \begin{macrocode}
+      \setbeamercolor*{alerted text}{fg=red!60!white}
       %% Items
-      \setbeamercolor*{item}{fg=fibeamer@brown!25!white}
-      \setbeamercolor{footnote mark}{fg=fibeamer@brown!25!white}
+      \setbeamercolor*{item}{fg=fibeamer@brown!30!white}
+      \setbeamercolor*{footnote mark}{fg=fibeamer@brown!30!white}
       %% Blocks
       \setbeamercolor*{block title}{
         use=structure, fg=white, bg=fibeamer@brown!60!white}
@@ -48,20 +52,28 @@
       \usebeamercolor*{normal text}
       % Code listings
       \lstset{
-        commentstyle=\color{green!25!white},
-        keywordstyle=\color{blue!25!white},
-        stringstyle=\color{fibeamer@brown!25!white}}
+        commentstyle=\color{green!30!white},
+        keywordstyle=\color{blue!30!white},
+        stringstyle=\color{fibeamer@brown!30!white}}
       }{%
     \endgroup}
 %    \end{macrocode}
 % Outside the |darkframes| environment, the light theme is used.
 %    \begin{macrocode}
   %% Structures
-  \setbeamercolor{structure}{fg=black!75!white, bg=white}
   \setbeamercolor{frametitle}{fg=fibeamer@brown}
   \setbeamercolor{framesubtitle}{fg=black!75!white}
   %% Text
-  \setbeamercolor{normal text}{fg=black}
+  \setbeamercolor{normal text}{fg=black, bg=white}
+  \setbeamercolor{structure}{fg=black, bg=white}
+%    \end{macrocode}
+% \changes{v1.1.0:7}{2016/01/12}{Added support for \cs{alert}. [VN]}
+%    \begin{macrocode}
+  \setbeamercolor{alerted text}{fg=red}
+  \addtobeamertemplate{block begin}{%
+    \iffibeamer@dark % alerted text in plain block at dark slides
+      \setbeamercolor{alerted text}{fg=red}%
+    \fi}{}
   %% Items
   \setbeamercolor{item}{fg=fibeamer@brown}
   \setbeamercolor{footnote mark}{fg=fibeamer@brown}
