@@ -103,11 +103,27 @@
 \ProvidesPackage{fibeamer/theme/mu/%
   beamerinnerthemefibeamer-mu}[2016/01/12]
 \mode<presentation>
+%    \end{macrocode}
+% This part of the inner theme defines the design of lists.
+%    \begin{macrocode}
 \defbeamertemplate*{itemize item}{fibeamer}{$\bullet$}
 \defbeamertemplate*{itemize subitem}{fibeamer}{\---}
 \defbeamertemplate*{itemize subsubitem}{fibeamer}{\guillemotright}
-\setbeamertemplate{bibliography item}{\insertbiblabel}
 %    \end{macrocode}
+% This part of the inner theme defines the design of bibliography
+% items and citations.^^A
+% \changes{v1.1.0:8}{2016/01/12}{Added support for colored
+%   citations. [VN]}
+%    \begin{macrocode}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\AtBeginDocument{%
+  \let\fibeamer@oldcite\cite
+  \def\cite#1{{%
+    \usebeamercolor[fg]{item}%
+    \fibeamer@oldcite{#1}}}}
+%    \end{macrocode}
+% This part of the inner theme defines the design of the table of
+% contents.
 % \changes{v1.1.0:6}{2016/01/11}{Added support for the
 %   \cs{tableofcontents}. [VN]}
 %    \begin{macrocode}
@@ -257,10 +273,8 @@
       \end{tikzpicture}
     \fi}
 %    \end{macrocode}
-% The title frame contains the |\title| vertically positioned to
-% the upper $\phi^{-1}$ of the page, where $\phi$ refers to the
-% golden ratio, and underlined with a dashed line. At the bottom
-% of the page, there is the |\subtitle| followed by the |\author|.
+% The title frame contains the main logo, the |\title|, the
+% |\subtitle|, and the |\author|.
 %    \begin{macrocode}
   \defbeamertemplate*{title page}{fibeamer}{%
     % This is slide 0

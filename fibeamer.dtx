@@ -50,7 +50,7 @@
 \NeedsTeXFormat{LaTeX2e}
 %
 % Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
-\def\fibeamer@version{2016/01/12 v1.1.0:7-dev fibeamer MU beamer theme}
+\def\fibeamer@version{2016/01/12 v1.1.0:8-dev fibeamer MU beamer theme}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
 %
 % \iffalse Use `\fibeamer@version` as the PDF creator key.
@@ -187,7 +187,7 @@
 % language of either the \textsf{babel} or the \textsf{polyglossia}
 % package, or \texttt{english}, when undefined.
 %
-% As far as the themes of the Masaryk University in Brno go, the
+% With regards to the themes of the Masaryk University in Brno, the
 % |\fibeamer@locale| macro is not used; it only provides the
 % default value to the |\fibeamer@logoLocale| macro.
 %    \begin{macrocode}
@@ -201,9 +201,9 @@
 % \end{macro}
 % \begin{macro}{\fibeamer@logoLocale}
 % \subsection{The \texttt{logoLocale} option}
-% The \marg{\texttt{logoLocale}=name} pair sets the name of the
-% logo file locale to \textit{name}. The \textit{name} is stored
-% within the |\fibeamer@logoLocale| macro, whose implicit value is
+% The \marg{\texttt{logoLocale}=name} pair sets the logo file
+% locale to \textit{name}. The \textit{name} is stored within the
+% |\fibeamer@logoLocale| macro, whose implicit value is
 % |\fibeamer@locale|.
 % \changes{v1.1.0:2}{2016/01/11}{Added the \texttt{logoLocale}
 %   option and the \cs{fibeamer@logoLocale} macro. [VN]}
@@ -251,7 +251,7 @@
       \else%              /<path> -> /<path>/
         #1#2#3#4/%
       \fi
-    \else%
+    \else
       \if#1.%
         \ifx#2\empty%           . -> ./
           ./%
@@ -277,7 +277,7 @@
       \else
         \fibeamer@basePath#1#2#3#4/%
       \fi
-    \fi%
+    \fi
   \fi}
 %    \end{macrocode}
 % \end{macro}
@@ -300,11 +300,11 @@
 % \subsection{The \texttt{logoPath} option}
 % The \marg{\texttt{logoPath}=path} pair sets the \textit{path}
 % containing the logo files, which is used by the outer themes to
-% load the faculty logos. The \textit{path} is
-% normalized using the |\fibeamer@subdir| macro and stored
-% within the |\fibeamer@logoPath| macro, whose implicit value
-% is |\fibeamer@basePath| followed by |logo/\fibeamer@university|.
-% By default, this expands to \texttt{fibeamer/logo/mu/}.
+% load the main logo. The \textit{path} is normalized using the
+% |\fibeamer@subdir| macro and stored within the
+% |\fibeamer@logoPath| macro, whose implicit value is
+% |\fibeamer@basePath| followed by |logo/\fibeamer@university|. By
+% default, this expands to \texttt{fibeamer/logo/mu/}.
 %    \begin{macrocode}
 \DeclareOptionBeamer{logoPath}{%
   \def\fibeamer@logoPath{\fibeamer@subdir#1%
@@ -315,9 +315,9 @@
 % \begin{macro}{\fibeamer@logo}
 % \subsection{The \texttt{logo} option}
 % The \marg{\texttt{logo}=filename} pair sets the prefix of the
-% filename of the logo file to be used as the title page logo to
-% \textit{filename}. The \textit{filename} is stored within the
-% |\fibeamer@logo| macro, whose implicit value is
+% filename of the main logo to \textit{filename}. The
+% \textit{filename} is stored within the |\fibeamer@logo| macro,
+% whose implicit value is
 % \changes{v1.1.0:1}{2015/11/24}{Changed the implicit value of the
 %   \cs{fibeamer@logo} macro. [VN]}
 % |\fibeamer@logoPath| followed by
