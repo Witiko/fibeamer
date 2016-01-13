@@ -116,6 +116,8 @@ $(CTANARCHIVE): $(SOURCES) $(MAKES) $(EXAMPLES) \
 	DIR=`mktemp -d` && mkdir -p "$$DIR/fibeamer" && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \
 	cp --parents --verbose $^ "$$DIR/fibeamer" && \
+	printf '.PHONY: implode\nimplode:\n' > \
+		"$$DIR/fibeamer/example/mu/Makefile" && \
 	(cd "$$DIR" && zip -r -v -nw $@ *) && \
 	mv "$$DIR"/$@ . && rm -rf "$$DIR"
 
