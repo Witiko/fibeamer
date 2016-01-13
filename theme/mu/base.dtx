@@ -117,7 +117,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamerouterthemefibeamer-mu}[2015/11/24]
+  beamerouterthemefibeamer-mu}[2016/01/11]
 \mode<presentation>
 %    \end{macrocode}
 % The theme uses the following packages:
@@ -233,7 +233,7 @@
     \IfFileExists{\fibeamer@logo}{%
       \includegraphics[width=4.66\fibeamer@margin]{\fibeamer@logo}%
     }{%
-      \includegraphics[width=4.66\fibeamer@margin]{\fibeamer@backupLogo}}
+      \includegraphics[width=4.66\fibeamer@margin]{\fibeamer@fallbackLogo}}
 
     % Input the title
     \usebeamerfont{title}%
