@@ -50,7 +50,7 @@
 \NeedsTeXFormat{LaTeX2e}
 %
 % Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
-\def\fibeamer@version{2015/11/24 v1.1.0:1-dev fibeamer MU beamer theme}
+\def\fibeamer@version{2016/01/11 v1.1.0:2-dev fibeamer MU beamer theme}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
 %
 % \iffalse Use `\fibeamer@version` as the PDF creator key.
@@ -191,6 +191,20 @@
   \def\fibeamer@locale{#1}}
 %    \end{macrocode}
 % \end{macro}
+% \begin{macro}{\fibeamer@logoLocale}
+% \subsection{The \texttt{logoLocale} option}
+% The \marg{\texttt{logoLocale}=name} pair sets the name of the
+% logo file locale to \textit{name}. The \textit{name} is stored
+% within the |\fibeamer@logoLocale| macro, whose implicit value is
+% |\fibeamer@locale|.
+% \changes{v1.1.0:2}{2016/01/11}{Added the \texttt{logoLocale}
+%   option and the \cs{fibeamer@logoLocale} macro. [VN]}
+% \begin{macrocode}
+\def\fibeamer@logoLocale{\fibeamer@locale}
+\DeclareOptionBeamer{logoLocale}{%
+  \def\fibeamer@logoLocale{#1}}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\fibeamer@basePath}
 % \subsection{The \texttt{basePath} option}
 % The \marg{\texttt{basePath}=path} pair sets the \textit{path}
@@ -293,7 +307,7 @@
 % \begin{macro}{\fibeamer@logo}
 % \subsection{The \texttt{logo} option}
 % The \marg{\texttt{logo}=filename} pair sets the prefix of the
-% filename of the logo file to be used as the faculty logo to
+% filename of the logo file to be used as the title page logo to
 % \textit{filename}. The \textit{filename} is stored within the
 % |\fibeamer@logo| macro, whose implicit value is
 % \changes{v1.1.0:1}{2015/11/24}{Changed the implicit value of the
@@ -301,7 +315,7 @@
 % |\fibeamer@logoPath| followed by
 % \texttt{fibeamer-}|\fibeamer@university|\texttt{^^A
 % \discretionary{-}{-}{-}}|\fibeamer@faculty|\texttt{-}^^A
-% |\fibeamer@locale|. By default, this expands to
+% |\fibeamer@logoLocale|. By default, this expands to
 % \texttt{fibeamer\discretionary{/}{/}{/}logo/fibeamer-mu-fi^^A
 % -english}.
 %
@@ -319,8 +333,8 @@
 \DeclareOptionBeamer{logo}{\def\fibeamer@logo{#1}}
 \ExecuteOptionsBeamer{%
   logo=\fibeamer@logoPath fibeamer-\fibeamer@university-%
-    \fibeamer@faculty-\fibeamer@locale.pdf}
-\def\fibeamer@backupLogo{%
+    \fibeamer@faculty-\fibeamer@logoLocale.pdf}
+\def\fibeamer@fallbackLogo{%
   \fibeamer@logoPath fibeamer-\fibeamer@university-%
     \fibeamer@faculty-english.pdf}
 %    \end{macrocode}
