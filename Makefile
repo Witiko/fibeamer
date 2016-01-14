@@ -92,6 +92,7 @@ $(MANUAL): $(DTXFILES)
 	makeindex -s gind.ist                       $(basename $@)
 	makeindex -s gglo.ist -o $(basename $@).gls $(basename $@).glo
 	pdflatex $<
+	pdflatex $<
 
 # This target generates a TeX directory structure file.
 $(TDSARCHIVE):
