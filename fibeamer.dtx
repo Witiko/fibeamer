@@ -39,7 +39,6 @@
 \begin{document}
   \RecordChanges
   \DocInput{fibeamer.dtx}
-  \newpage
   \PrintIndex
   \RaggedRight
   \PrintChanges
@@ -60,6 +59,12 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
+% \changes{v1.1.1:3} {2016/01/14}{Refactored the themes of the
+%   Masaryk University in Brno. Removed the useless uses of
+%   \texttt{use} in the color themes. Replaced
+%   \cs{setbeamertemplate} in the inner theme with the more
+%   appropriate \cs{defbeamertemplate*}. Added missing
+%   \texttt{\%}s. [VN]}
 % \changes{v1.1.0:7} {2016/01/12}{Updated the example documents of
 %   the Masaryk University in Brno to showcase the use of
 %   \cs{alert}. [VN]}
@@ -88,7 +93,7 @@
 % \noindent This document details the design and the implementation
 % of the \textsf{fibeamer} theme for the \textsf{beamer} document
 % class. Included are technical information for anyone who wishes
-% to extend the theme with their own color themes as well as
+% to extend the theme with their own beamer themes as well as
 % information for ordinary users.
 % \end{abstract}
 %

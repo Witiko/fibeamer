@@ -5,7 +5,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamercolorthemefibeamer-mu-econ}[2016/01/12]
+  beamercolorthemefibeamer-mu-econ}[2016/01/14]
 \mode<presentation>
 %    \end{macrocode}
 % This color theme uses the combination of red-brown, gray and
@@ -41,18 +41,18 @@
       \setbeamercolor*{item}{fg=fibeamer@brown!30!white}
       \setbeamercolor*{footnote mark}{fg=fibeamer@brown!30!white}
       %% Blocks
-      \setbeamercolor*{block title}{
-        use=structure, fg=white, bg=fibeamer@brown!60!white}
-      \setbeamercolor*{block title example}{
-        use=example text, fg=white, bg=fibeamer@brown!60!white}
-      \setbeamercolor*{block title alerted}{
-        use=alerted text, fg=white, bg=fibeamer@brown!90!white}
-      \setbeamercolor*{block body}{
-        fg=fibeamer@brown, use=block title,
+      \setbeamercolor*{block title}{%
+        fg=white, bg=fibeamer@brown!60!white}
+      \setbeamercolor*{block title example}{%
+        fg=white, bg=fibeamer@brown!60!white}
+      \setbeamercolor*{block title alerted}{%
+        fg=white, bg=fibeamer@brown!90!white}
+      \setbeamercolor*{block body}{%
+        fg=fibeamer@brown,
         bg=fibeamer@gray!15!white}
       \usebeamercolor*{normal text}
       % Code listings
-      \lstset{
+      \lstset{%
         commentstyle=\color{green!30!white},
         keywordstyle=\color{blue!30!white},
         stringstyle=\color{fibeamer@brown!30!white}}
@@ -80,19 +80,18 @@
   \setbeamercolor{item}{fg=fibeamer@brown}
   \setbeamercolor{footnote mark}{fg=fibeamer@brown}
   %% Blocks
-  \setbeamercolor{block title}{
-    use=structure, fg=white, bg=fibeamer@brown!50!white}
-  \setbeamercolor{block title example}{
-    use=example text, fg=white, bg=fibeamer@brown!50!white}
-  \setbeamercolor{block title alerted}{
-    use=alerted text, fg=white, bg=fibeamer@brown}
-  \setbeamercolor{block body}{
-    fg=fibeamer@brown, use=block title, bg=fibeamer@gray!20!white}
+  \setbeamercolor{block title}{%
+    fg=white, bg=fibeamer@brown!50!white}
+  \setbeamercolor{block title example}{%
+    fg=white, bg=fibeamer@brown!50!white}
+  \setbeamercolor{block title alerted}{%
+    fg=white, bg=fibeamer@brown}
+  \setbeamercolor{block body}{%
+    fg=fibeamer@brown, bg=fibeamer@gray!20!white}
   %% Title
   \setbeamercolor{title}{fg=white, bg=fibeamer@brown}
-  \setbeamercolor{title}{use=structure}
   % Code listings
-  \lstset{
+  \lstset{%
     basicstyle=\footnotesize\ttfamily,
     breakatwhitespace=false,
     breaklines=true,

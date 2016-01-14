@@ -111,7 +111,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamerinnerthemefibeamer-mu}[2016/01/12]
+  beamerinnerthemefibeamer-mu}[2016/01/14]
 \mode<presentation>
 %    \end{macrocode}
 % This part of the inner theme defines the design of lists.
@@ -126,7 +126,7 @@
 %   citations to the themes of the Masaryk University in Brno.
 %   [VN]}
 %    \begin{macrocode}
-\setbeamertemplate{bibliography item}{\insertbiblabel}
+\defbeamertemplate*{bibliography item}{fibeamer}{\insertbiblabel}
 \AtBeginDocument{%
   \let\fibeamer@oldcite\cite
   \def\cite#1{{%
@@ -139,18 +139,18 @@
 %   \cs{tableofcontents} to the themes of the Masaryk University in
 %   Brno. [VN]}
 %    \begin{macrocode}
-\setbeamertemplate{section in toc}{%
+\defbeamertemplate*{section in toc}{fibeamer}{%
   \usebeamercolor[fg]{item}%
     \inserttocsectionnumber.%
   \usebeamercolor[fg]{structure}%
   \kern1.25ex\inserttocsection\par}
-\setbeamertemplate{subsection in toc}{%
+\defbeamertemplate*{subsection in toc}{fibeamer}{%
   \hspace\leftmargini
   \usebeamercolor[fg]{item}%
     \inserttocsectionnumber.\inserttocsubsectionnumber%
   \usebeamercolor[fg]{structure}%
   \kern1.25ex\inserttocsubsection\par}
-\setbeamertemplate{subsubsection in toc}{%
+\defbeamertemplate*{subsubsection in toc}{fibeamer}{%
   \hspace\leftmargini
   \hspace\leftmarginii
   \usebeamercolor[fg]{item}%
