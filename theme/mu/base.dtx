@@ -6,7 +6,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamercolorthemefibeamer-mu}[2016/01/12]
+  beamercolorthemefibeamer-mu}[2016/01/14]
 %    \end{macrocode}
 % \begin{macro}{\darkframes}
 % The |darkframes| environment switches the color definitions to
@@ -54,18 +54,28 @@
 % |fibeamer@backgroundOuter| colors will be defined by the
 % subsequently loaded color theme.
 %    \begin{macrocode}
-\defbeamertemplate*{background canvas}{fibeamer}{%
-  \ifthenelse{%
-    \boolean{fibeamer@dark} \OR \c@framenumber=0
-  }{%
-    \begin{tikzpicture}
-      \clip (0,\fibeamer@lengths@clipbottom) rectangle
-        (\paperwidth,\fibeamer@lengths@cliptop);
-      \path [inner color = fibeamer@backgroundInner,
-             outer color = fibeamer@backgroundOuter]
-        (0,0) rectangle (\paperwidth,\paperwidth);
-    \end{tikzpicture}
-  }{}}
+  \defbeamertemplate*{background canvas}{fibeamer}{%
+    \ifthenelse{%
+      \boolean{fibeamer@dark} \OR \c@framenumber=0
+    }{%
+      \begin{tikzpicture}
+        \clip (0,\fibeamer@lengths@clipbottom) rectangle
+          (\paperwidth,\fibeamer@lengths@cliptop);
+        \path [inner color = fibeamer@backgroundInner,
+               outer color = fibeamer@backgroundOuter]
+          (0,0) rectangle (\paperwidth,\paperwidth);
+      \end{tikzpicture}
+    }{}}
+%    \end{macrocode}
+% The |\qed| symbol inserted at the end of proofs will have the
+% same color as the rest of the proof.
+% \changes{v1.1.1:2}{2016/01/14}{Added proper coloring of
+%   \cs{qed} to the themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+  \setbeamercolor{qed symbol}{%
+    use=block body,
+    fg=block body.fg,
+    bg=block body.bg}
 \mode
 <all>
 %    \end{macrocode}
