@@ -51,7 +51,7 @@
 \NeedsTeXFormat{LaTeX2e}
 %
 % Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
-\def\fibeamer@version{2016/01/13 v1.1.0 fibeamer MU beamer theme}
+\def\fibeamer@version{2016/01/13 v1.1.1-dev fibeamer MU beamer theme}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
 %
 % \iffalse Use `\fibeamer@version` as the PDF creator key.
@@ -329,23 +329,29 @@
 % |\fibeamer@logoLocale|. By default, this expands to
 % \texttt{fibeamer\discretionary{/}{/}{/}logo/fibeamer-mu-fi^^A
 % -english}.
-%
-% \changes{v1.1.0:3}{2016/01/11}{Added the \cs{fibeamer@fallbackLogo}
-%   macro. [VN]}
-% The \DescribeMacro{\fibeamer@fallbackLogo}
-% |\fibeamer@fallbackLogo| macro contains the filename of the logo
-% file to be used, if |\fibeamer@logo| doesn't exist. The implicit
-% value of the |\fibeamer@fall|\discretionary{-}{}{}|backLogo| macro
-% is |\fibeamer@logoPath| followed by \texttt{fibeamer-}^^A
-% |\fibeamer@uni|\texttt{\discretionary{-}{}{}}|versity|^^A
-% |\fibeamer@faculty|\texttt{-english}. By default, this expands to
-% \texttt{fibeamer/logo\discretionary{/}{/}{/}fi\-beamer-mu-fi-^^A
-% english}.
 %    \begin{macrocode}
 \DeclareOptionBeamer{logo}{\def\fibeamer@logo{#1}}
 \ExecuteOptionsBeamer{%
   logo=\fibeamer@logoPath fibeamer-\fibeamer@university-%
     \fibeamer@faculty-\fibeamer@logoLocale}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@fallbackLogo}
+% \subsection{The \texttt{fallbackLogo} option}
+% \changes{v1.1.0:3}{2016/01/11}{Added the \cs{fibeamer@fallbackLogo}
+%   macro. [VN]}
+% \changes{v1.1.1}{2016/01/14}{Added the \texttt{fallbackLogo}
+%   option. [VN]}
+% The |\fibeamer@fallbackLogo| macro contains the filename of the
+% logo file to be used, if |\fibeamer@logo| does not exist. The
+% implicit value of the |\fibeamer@fall|\discretionary{-}{}{}^^A
+% |backLogo| macro is |\fibeamer@logoPath| followed by
+% \texttt{fibeamer-}|\fibeamer@uni|\texttt{\discretionary{-}{}{}}^^A
+% |versity\fibeamer@faculty|\texttt{-english}. By default, this
+% expands to \texttt{fibeamer/logo\discretionary{/}{/}{/}fi\-bea^^A
+% mer-mu-fi-english}.
+%    \begin{macrocode}
+\DeclareOptionBeamer{fallbackLogo}{\def\fibeamer@fallbackLogo{#1}}
 \def\fibeamer@fallbackLogo{%
   \fibeamer@logoPath fibeamer-\fibeamer@university-%
     \fibeamer@faculty-english}
