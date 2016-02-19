@@ -50,7 +50,11 @@
 \NeedsTeXFormat{LaTeX2e}
 %
 % Define `\fibeamer@version` and store it in the `VERSION.tex` file \fi
-\def\fibeamer@version{2016/01/17 v1.1.1 fibeamer MU beamer theme}
+{\def\fibeamer@versiondef#1#2{
+  \gdef\fibeamer@version@number{#1}
+  \gdef\fibeamer@version@date{#2}
+  \gdef\fibeamer@version{#2 #1 fibeamer MU beamer theme}}
+\fibeamer@versiondef{v1.1.2}{2016/02/19}}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
 %
 % \iffalse Use `\fibeamer@version` as the PDF creator key.
@@ -423,6 +427,32 @@
     {}% <success>
     {}% <failure>
   \includegraphics[#1]\fibeamer@logo}}
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\fibeamer@patch}
+% \changes{v1.1.2}{2016/02/19}{Added \cs{fibeamer@patch}.}
+% The |\fibeamer@patch|\oarg{versions}\oarg{patch} macro expands
+% \textit{patch}, if |\fibeamer|\texttt{\discretionary{@}{@}{@}}^^A
+% |version@number| (defined at the top of the file
+% \texttt{beamerthemefibeamer.sty}) matches any of the
+% comma-delimited \textit{versions}. This macro enables the simple
+% deployment of version-targeted patches.
+%    \begin{macrocode}
+\def\fibeamer@patch#1#2{%
+  \def\fibeamer@patch@versions{#1}%
+  \def\fibeamer@patch@action{#2}%
+  \def\fibeamer@patch@next##1,{%
+    \def\fibeamer@patch@arg{##1}%
+    \def\fibeamer@patch@relax{\relax}%
+    \ifx\fibeamer@patch@arg\fibeamer@version@number
+      \def\fibeamer@patch@next####1\relax,{}%
+      \expandafter\fibeamer@patch@action
+      \expandafter\fibeamer@patch@next
+    \else\ifx\fibeamer@patch@arg\fibeamer@patch@relax\else
+      \expandafter\expandafter\expandafter\fibeamer@patch@next
+    \fi\fi}%
+  \expandafter\expandafter\expandafter\fibeamer@patch@next
+  \expandafter\fibeamer@patch@versions\expandafter,\relax,}
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Main routine}
