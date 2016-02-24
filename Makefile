@@ -1,8 +1,9 @@
 SUBMAKES_REQUIRED=logo/mu theme/mu
-SUBMAKES_MISCELLANEOUS=guide/mu example/mu
-SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_MISCELLANEOUS)
+SUBMAKES_EXTRA=guide/mu example/mu
+SUBMAKES_TEST=test/mu
+SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_EXTRA) $(SUBMAKES_TEST)
 .PHONY: all complete clean dist dist-implode implode \
-	install uninstall $(SUBMAKES_REQUIRED)
+	install uninstall tests $(SUBMAKES)
 
 BASETHEMEFILE=beamerthemefibeamer.sty
 OTHERTHEMEFILES=theme/mu/*.sty
@@ -11,7 +12,9 @@ LOGOSOURCES=logo/*/*.pdf
 LOGOS=logo/*/*.eps
 DTXFILES=*.dtx theme/mu/*.dtx
 INSFILES=*.ins theme/mu/*.ins
-MAKES=guide/mu/Makefile theme/mu/Makefile logo/mu/Makefile Makefile
+TESTS=test/mu/*.pdf
+MAKES=guide/mu/Makefile theme/mu/Makefile logo/mu/Makefile Makefile \
+	test/mu/Makefile
 USEREXAMPLE_SOURCES=example/mu/Makefile example/mu/example.dtx \
 	example/mu/*.ins
 USEREXAMPLES=example/mu/econ-lualatex.pdf \
@@ -30,7 +33,8 @@ DEVEXAMPLES=logo/DESCRIPTION logo/EXAMPLE/DESCRIPTION \
 	example/EXAMPLE/DESCRIPTION example/mu/DESCRIPTION \
 	example/mu/resources/DESCRIPTION guide/DESCRIPTION \
 	guide/EXAMPLE/DESCRIPTION guide/mu/DESCRIPTION \
-	guide/mu/resources/DESCRIPTION
+	guide/mu/resources/DESCRIPTION test/DESCRIPTION \
+	test/EXAMPLE/DESCRIPTION test/mu/DESCRIPTION
 EXAMPLES=$(USEREXAMPLES) $(DEVEXAMPLES)
 MISCELLANEOUS=guide/mu/guide.bib \
 	guide/mu/guide.dtx guide/mu/*.ins guide/mu/resources/cog.pdf \
@@ -66,12 +70,15 @@ all: $(SUBMAKES_REQUIRED)
 
 # This pseudo-target creates the theme files and typesets the
 # technical documentation and the guides.
-complete: all $(SUBMAKES)
+complete: all
 	make $(PDFS) clean
 
 # This pseudo-target calls a submakefile.
-$(SUBMAKES_REQUIRED):
+$(SUBMAKES):
 	make -C $@ all
+
+# This pseudo-target performs the tests.
+tests: all $(SUBMAKES_TEST)
 
 # This pseudo-target creates the distribution archive.
 dist: dist-implode complete
@@ -102,7 +109,7 @@ $(TDSARCHIVE):
 	mv "$$DIR"/$@ $@ && rm -rf "$$DIR"
 
 # This target generates a distribution file.
-$(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
+$(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) $(TESTS) \
 	$(USEREXAMPLE_SOURCES) $(DOCS) $(PDFSOURCES) $(MISCELLANEOUS) \
 	$(EXAMPLES) $(VERSION)
 	DIR=`mktemp -d` && \
@@ -112,7 +119,7 @@ $(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
 	mv "$$DIR"/$@ . && rm -rf "$$DIR"
 
 # This target generates a CTAN distribution file.
-$(CTANARCHIVE): $(SOURCES) $(MAKES) $(EXAMPLES) \
+$(CTANARCHIVE): $(SOURCES) $(MAKES) $(TESTS) $(EXAMPLES) \
 	$(MISCELLANEOUS) $(DOCS) $(VERSION) $(LOGOSOURCES)
 	DIR=`mktemp -d` && mkdir -p "$$DIR/fibeamer" && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \

@@ -21,13 +21,16 @@ as well as the LaTeX packages required for the typesetting of the
 technical documentation within the `fithesis.dtx` file and the
 guide files within the `guide/` subdirectory.
 
+(For running the test suite using the `make tests` command, the
+`comparepdf` command is also required.)
+
 ## Procedure ##
 
 To begin the installation, execute the following command from within
 the current directory:
 
     make complete
-    make install to=[[TDS]] nohash=true
+    make install to=[[TDS]]
 
 and replace `[[TDS]]` with a path to the TeX directory structure into
 which you want to install the package (such as `/usr/share/texmf`).
@@ -53,7 +56,7 @@ distribution:
 To uninstall the package, execute the following command from within
 the current directory:
 
-    make uninstall from=[[TDS]] nohash=true
+    make uninstall from=[[TDS]]
 
 and replace `[[TDS]]` with a path to the TeX directory structure into
 which you want to install the package (such as `/usr/share/texmf`).
