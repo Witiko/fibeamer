@@ -2,8 +2,8 @@ SUBMAKES_REQUIRED=logo/mu theme/mu
 SUBMAKES_EXTRA=guide/mu example/mu
 SUBMAKES_TEST=test/mu
 SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_EXTRA) $(SUBMAKES_TEST)
-.PHONY: all complete clean dist dist-implode implode \
-	install uninstall tests $(SUBMAKES)
+.PHONY: all complete docs clean dist dist-implode implode \
+	install install-base install-docs uninstall tests $(SUBMAKES)
 
 BASETHEMEFILE=beamerthemefibeamer.sty
 OTHERTHEMEFILES=theme/mu/*.sty
@@ -68,10 +68,15 @@ TEXLIVEDIR=$(shell kpsewhich -var-value TEXMFLOCAL)
 all: $(SUBMAKES_REQUIRED)
 	make $(BASETHEMEFILE)
 
-# This pseudo-target creates the theme files and typesets the
-# technical documentation and the guides.
+# This pseudo-target creates the class files and typesets the
+# technical documentation, the user guides, and the user examples.
 complete: all
 	make $(PDFS) clean
+
+# This pseudo-target typesets the technical documentation and the
+# user guides.
+docs:
+	make $(DOCS) clean
 
 # This pseudo-target calls a submakefile.
 $(SUBMAKES):
@@ -129,55 +134,75 @@ $(CTANARCHIVE): $(SOURCES) $(MAKES) $(TESTS) $(EXAMPLES) \
 	(cd "$$DIR" && zip -r -v -nw $@ *) && \
 	mv "$$DIR"/$@ . && rm -rf "$$DIR"
 
-# This pseudo-target installs the theme files and the technical
-# documentation into the TeX directory structure, whose root
-# directory is specified within the "to" argument. Specify
-# "nohash=true", if you wish to forgo the reindexing of the package
-# database.
-install:
+# This pseudo-target installs the logo and theme files - as well as
+# the technical documentation and user guides - into the TeX
+# directory structure, whose root directory is specified within the
+# "to" argument.  Specify "nohash=true", if you wish to forgo the
+# reindexing of the package database.
+install: install-base install-docs
+
+# This pseudo-target installs the logo and theme files into the TeX
+# directory structure, whose root directory is specified within the
+# "to" argument.  Specify "nohash=true", if you wish to forgo the
+# reindexing of the package database.
+install-base:
 	@if [ -z "$(to)" ]; then \
-		printf "Usage: make install to=DIRECTORY"; \
+		printf "Usage: make install-base to=DIRECTORY\n"; \
 		printf "Detected TeXLive directory: %s\n" $(TEXLIVEDIR); \
 		exit 1; \
 	fi
 	
-	# Theme and logo files
+	@# Theme and logo files
 	mkdir -p "$(to)/tex/latex/fibeamer"
 	cp --parents --verbose $(RESOURCES) "$(to)/tex/latex/fibeamer"
 	
-	# Source files
+	@# Source files
 	mkdir -p "$(to)/source/latex/fibeamer"
 	cp --parents --verbose $(SOURCES) "$(to)/source/latex/fibeamer"
 	
-	# Documentation
-	mkdir -p "$(to)/doc/latex/fibeamer"
-	cp --parents --verbose $(DOCS) "$(to)/doc/latex/fibeamer"
-	
-	# Rebuild the hash
+	@# Rebuild the hash
 	[ "$(nohash)" = "true" ] || texhash
 
-# This pseudo-target installs the theme files and the technical
-# documentation into the TeX directory structure, whose root
-# directory is specified within the "to" argument. Specify
-# "nohash=true", if you wish to forgo the reindexing of the package
-# database.
-uninstall:
-	@if [ -z "$(from)" ]; then \
-		printf "Usage: make uninstall from=DIRECTORY"; \
+# This pseudo-target installs the technical documentation and user
+# guides into the TeX directory structure, whose root directory is
+# specified within the "to" argument.  Specify "nohash=true", if
+# you wish to forgo the reindexing of the package database.
+install-docs:
+	@if [ -z "$(to)" ]; then \
+		printf "Usage: make install-docs to=DIRECTORY\n"; \
 		printf "Detected TeXLive directory: %s\n" $(TEXLIVEDIR); \
 		exit 1; \
 	fi
 	
-	# Theme and logo files
+	@# Documentation
+	mkdir -p "$(to)/doc/latex/fibeamer"
+	cp --parents --verbose $(DOCS) "$(to)/doc/latex/fibeamer"
+	
+	@# Rebuild the hash
+	[ "$(nohash)" = "true" ] || texhash
+
+# This pseudo-target uninstalls the logo and theme files - as well
+# as the technical documentation and user guides - into the TeX
+# directory structure, whose root directory is specified within the
+# "from" argument.  Specify "nohash=true", if you wish to forgo the
+# reindexing of the package database.
+uninstall:
+	@if [ -z "$(from)" ]; then \
+		printf "Usage: make uninstall from=DIRECTORY\n"; \
+		printf "Detected TeXLive directory: %s\n" $(TEXLIVEDIR); \
+		exit 1; \
+	fi
+	
+	@# Theme and logo files
 	rm -rf "$(from)/tex/latex/fibeamer"
 	
-	# Source files
+	@# Source files
 	rm -rf "$(from)/source/latex/fibeamer"
 	
-	# Documentation
+	@# Documentation
 	rm -rf "$(from)/doc/latex/fibeamer"
 	
-	# Rebuild the hash
+	@# Rebuild the hash
 	[ "$(nohash)" = "true" ] || texhash
 
 # This pseudo-target removes any existing auxiliary files.
