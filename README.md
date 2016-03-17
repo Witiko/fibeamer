@@ -28,7 +28,7 @@ guide files within the `guide/` subdirectory.
 To install the package, execute the following command from within
 the current directory:
 
-    make all
+    make base
     make install-base to=[[TDS]] nohash=true
 
 where `[[TDS]]` is a path in the TeX directory structure to which

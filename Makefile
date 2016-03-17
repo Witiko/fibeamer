@@ -2,7 +2,7 @@ SUBMAKES_REQUIRED=logo/mu theme/mu
 SUBMAKES_EXTRA=guide/mu example/mu
 SUBMAKES_TEST=test/mu
 SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_EXTRA) $(SUBMAKES_TEST)
-.PHONY: all complete docs clean dist dist-implode implode \
+.PHONY: all base complete docs clean dist dist-implode implode \
 	install install-base install-docs uninstall tests $(SUBMAKES)
 
 BASETHEMEFILE=beamerthemefibeamer.sty
@@ -63,14 +63,17 @@ MAKEABLES=$(MANUAL) $(BASETHEMEFILE) $(ARCHIVES) $(VERSION)
 
 TEXLIVEDIR=$(shell kpsewhich -var-value TEXMFLOCAL)
 
+# This is the default pseudo-target.
+all: base
+
 # This pseudo-target expands all the docstrip files, converts the
 # logos and creates the theme files.
-all: $(SUBMAKES_REQUIRED)
+base: $(SUBMAKES_REQUIRED)
 	make $(BASETHEMEFILE)
 
 # This pseudo-target creates the class files and typesets the
 # technical documentation, the user guides, and the user examples.
-complete: all
+complete: base
 	make $(PDFS) clean
 
 # This pseudo-target typesets the technical documentation and the
@@ -83,7 +86,7 @@ $(SUBMAKES):
 	make -C $@ all
 
 # This pseudo-target performs the tests.
-tests: all $(SUBMAKES_TEST)
+tests: base $(SUBMAKES_TEST)
 
 # This pseudo-target creates the distribution archive.
 dist: dist-implode complete
