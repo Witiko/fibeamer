@@ -18,11 +18,11 @@
   \definecolor{fibeamer@white}{HTML}{FFFFFF}
   \definecolor{fibeamer@violet}{HTML}{660099}
   \definecolor{fibeamer@brightViolet}{HTML}{B21AFF}
+  \colorlet{fibeamer@lightViolet}{fibeamer@violet!30!fibeamer@white}
   \definecolor{fibeamer@gray}{HTML}{999999}
 %    \end{macrocode}
 % \changes{v1.1.4:2}{2016/05/06}{Removed gradient backgrounds from the color
-% themes for the Faculty of Informatics at the Masaryk University in Brno.
-% [VN]}
+%   themes of the Masaryk University in Brno. [VN]}
 %    \begin{macrocode}
   %% Background gradients
   \colorlet{fibeamer@dark@backgroundInner}{fibeamer@violet!70!fibeamer@black}
@@ -37,7 +37,7 @@
     \begingroup
       \fibeamer@darktrue
       %% Structures
-      \setbeamercolor*{frametitle}{fg=fibeamer@violet!30!fibeamer@white}
+      \setbeamercolor*{frametitle}{fg=fibeamer@lightViolet}
       \setbeamercolor*{framesubtitle}{fg=fibeamer@white}
       %% Text
       \setbeamercolor*{normal text}{fg=fibeamer@white, bg=fibeamer@violet}
@@ -48,9 +48,14 @@
 %    \begin{macrocode}
       \setbeamercolor*{alerted text}{%
         fg=fibeamer@brightViolet!60!fibeamer@white!90!red}
-      %% Items
-      \setbeamercolor*{item}{fg=fibeamer@violet!30!fibeamer@white}
-      \setbeamercolor*{footnote mark}{fg=fibeamer@violet!30!fibeamer@white}
+%    \end{macrocode}
+% \changes{v1.1.4:3}{2016/05/06}{Added proper link coloring for the
+%   color themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+      %% Items, footnotes and links
+      \setbeamercolor*{item}{fg=fibeamer@lightViolet}
+      \setbeamercolor*{footnote mark}{fg=fibeamer@lightViolet}
+      \hypersetup{urlcolor=fibeamer@lightViolet}
       %% Blocks
       \setbeamercolor*{block title}{%
         fg=fibeamer@white, bg=fibeamer@violet!60!fibeamer@white}
@@ -66,7 +71,7 @@
       \lstset{%
         commentstyle=\color{green!30!fibeamer@white},
         keywordstyle=\color{blue!30!fibeamer@white},
-        stringstyle=\color{fibeamer@violet!30!fibeamer@white}}
+        stringstyle=\color{fibeamer@lightViolet}}
       }{%
     \endgroup}
 %    \end{macrocode}
@@ -89,9 +94,14 @@
     \else % alerted text in plain block at light slides
       \setbeamercolor{alerted text}{fg=fibeamer@brightViolet!80!fibeamer@white}%
     \fi}{}
-  %% Items
+%    \end{macrocode}
+% \changes{v1.1.4:3}{2016/05/06}{Added proper link coloring for the
+%   color themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+  %% Items, footnotes and links
   \setbeamercolor{item}{fg=fibeamer@violet}
   \setbeamercolor{footnote mark}{fg=fibeamer@violet}
+  \hypersetup{urlcolor=fibeamer@violet}
   %% Blocks
   \setbeamercolor{block title}{%
     fg=fibeamer@white, bg=fibeamer@violet!50!fibeamer@white}

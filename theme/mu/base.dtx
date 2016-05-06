@@ -59,8 +59,6 @@
 % background as specified by the |fibeamer@light@backgroundInner|
 % and |fibeamer@light@backgroundOuter| colors that shall be defined
 % by the subsequently loaded color theme.
-% \changes{v1.1.4:1}{2016/05/06}{Gradients are now drawn for both
-%   light and dark slides. [VN]}
 %    \begin{macrocode}
   \defbeamertemplate*{background canvas}{fibeamer}{%
     \ifthenelse{%
@@ -92,6 +90,12 @@
     use=block body,
     fg=block body.fg,
     bg=block body.bg}
+%    \end{macrocode}
+% The links can be colored by the subsequently loaded color themes.
+% \changes{v1.1.4:3}{2016/05/06}{Added proper link coloring for the
+%   color themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+  \hypersetup{colorlinks,linkcolor=}
 \mode
 <all>
 %    \end{macrocode}
@@ -127,7 +131,7 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamerinnerthemefibeamer-mu}[2016/05/06]
+  beamerinnerthemefibeamer-mu}[2016/01/14]
 \mode<presentation>
 %    \end{macrocode}
 % This part of the inner theme defines the design of lists.

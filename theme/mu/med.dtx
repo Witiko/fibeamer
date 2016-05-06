@@ -19,11 +19,11 @@
   \definecolor{fibeamer@white}{HTML}{FFFFFF}
   \definecolor{fibeamer@red}{HTML}{c82600}
   \definecolor{fibeamer@brightRed}{HTML}{FF350A}
+  \colorlet{fibeamer@lightRed}{fibeamer@red!30!fibeamer@white}
   \definecolor{fibeamer@gray}{HTML}{999999}
 %    \end{macrocode}
 % \changes{v1.1.4:2}{2016/05/06}{Removed gradient backgrounds from the color
-% themes for the Faculty of Informatics at the Masaryk University in Brno.
-% [VN]}
+%   themes of the Masaryk University in Brno. [VN]}
 %    \begin{macrocode}
   %% Background gradients
   \colorlet{fibeamer@dark@backgroundInner}{fibeamer@red!60!fibeamer@black}
@@ -38,7 +38,7 @@
     \begingroup
       \fibeamer@darktrue
       %% Structures
-      \setbeamercolor*{frametitle}{fg=fibeamer@red!30!fibeamer@white}
+      \setbeamercolor*{frametitle}{fg=fibeamer@lightRed}
       \setbeamercolor*{framesubtitle}{fg=fibeamer@white}
       %% Text
       \setbeamercolor*{normal text}{fg=fibeamer@white, bg=fibeamer@red}
@@ -49,9 +49,14 @@
 %    \begin{macrocode}
       \setbeamercolor*{alerted text}{%
         fg=fibeamer@brightRed!60!fibeamer@white!80!yellow}
-      %% Items
-      \setbeamercolor*{item}{fg=fibeamer@red!30!fibeamer@white}
-      \setbeamercolor*{footnote mark}{fg=fibeamer@red!30!fibeamer@white}
+%    \end{macrocode}
+% \changes{v1.1.4:3}{2016/05/06}{Added proper link coloring for the
+%   color themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+      %% Items, footnotes and links
+      \setbeamercolor*{item}{fg=fibeamer@lightRed}
+      \setbeamercolor*{footnote mark}{fg=fibeamer@lightRed}
+      \hypersetup{urlcolor=fibeamer@lightRed}
       %% Blocks
       \setbeamercolor*{block title}{%
         fg=fibeamer@white, bg=fibeamer@red!60!fibeamer@white}
@@ -67,7 +72,7 @@
       \lstset{%
         commentstyle=\color{green!30!fibeamer@white},
         keywordstyle=\color{blue!30!fibeamer@white},
-        stringstyle=\color{fibeamer@red!30!fibeamer@white}}
+        stringstyle=\color{fibeamer@lightRed}}
       }{%
     \endgroup}
 %    \end{macrocode}
@@ -92,9 +97,14 @@
       \setbeamercolor{alerted text}{%
         fg=fibeamer@brightRed!80!fibeamer@white}%
     \fi}{}
-  %% Items
-  \setbeamercolor{item}{fg=fibeamer@red}
-  \setbeamercolor{footnote mark}{fg=fibeamer@red}
+%    \end{macrocode}
+% \changes{v1.1.4:3}{2016/05/06}{Added proper link coloring for the
+%   color themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+  %% Items, footnotes and links
+  \setbeamercolor*{item}{fg=fibeamer@red}
+  \setbeamercolor*{footnote mark}{fg=fibeamer@red}
+  \hypersetup{urlcolor=fibeamer@red}
   %% Blocks
   \setbeamercolor{block title}{%
     fg=fibeamer@white, bg=fibeamer@red!50!fibeamer@white}

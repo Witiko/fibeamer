@@ -24,6 +24,10 @@
   \colorlet{fibeamer@gray}{white!35!fibeamer@black}
   \colorlet{fibeamer@darkGray}{white!20!fibeamer@black}
   \colorlet{fibeamer@blue}{blue!60!fibeamer@lightGray}
+%    \end{macrocode}
+% \changes{v1.1.4:2}{2016/05/06}{Removed gradient backgrounds from the color
+%   themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
   %% Background gradients
   \colorlet{fibeamer@dark@backgroundInner}{fibeamer@black}
   \colorlet{fibeamer@dark@backgroundOuter}{fibeamer@black}
@@ -48,9 +52,14 @@
 %    \begin{macrocode}
       \setbeamercolor*{alerted text}{%
         fg=fibeamer@lightOrange}
-      %% Items
+%    \end{macrocode}
+% \changes{v1.1.4:3}{2016/05/06}{Added proper link coloring for the
+%   color themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+      %% Items, footnotes and links
       \setbeamercolor*{item}{fg=fibeamer@lightOrange}
       \setbeamercolor*{footnote mark}{fg=fibeamer@lightOrange}
+      \hypersetup{urlcolor=fibeamer@lightOrange}
       %% Blocks
       \setbeamercolor*{block title}{%
         fg=fibeamer@black, bg=fibeamer@lightOrange}
@@ -83,9 +92,14 @@
 %   the themes of the Masaryk University in Brno. [VN]}
 %    \begin{macrocode}
   \setbeamercolor{alerted text}{fg=fibeamer@orange}
-  %% Items
-  \setbeamercolor{item}{fg=fibeamer@orange}
-  \setbeamercolor{footnote mark}{fg=fibeamer@orange}
+%    \end{macrocode}
+% \changes{v1.1.4:3}{2016/05/06}{Added proper link coloring for the
+%   color themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+  %% Items, footnotes and links
+  \setbeamercolor*{item}{fg=fibeamer@orange}
+  \setbeamercolor*{footnote mark}{fg=fibeamer@orange}
+  \hypersetup{urlcolor=fibeamer@blue}
   %% Blocks
   \setbeamercolor{block title}{%
     fg=fibeamer@black, bg=fibeamer@lightOrange}

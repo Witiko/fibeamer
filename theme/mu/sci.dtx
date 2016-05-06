@@ -20,14 +20,14 @@
   \definecolor{fibeamer@green}{HTML}{139632}
   \definecolor{fibeamer@gray}{HTML}{999999}
   \definecolor{fibeamer@brightGreen}{HTML}{2ECE0F}
+  \colorlet{fibeamer@lightGreen}{fibeamer@green!30!fibeamer@white}
 %    \end{macrocode}
 % \changes{v1.1.4:2}{2016/05/06}{Removed gradient backgrounds from the color
-% themes for the Faculty of Informatics at the Masaryk University in Brno.
-% [VN]}
+%   themes of the Masaryk University in Brno. [VN]}
 %    \begin{macrocode}
   %% Background gradients
-  \colorlet{fibeamer@dark@backgroundInner}{fibeamer@green!70!fibeamer@black}
-  \colorlet{fibeamer@dark@backgroundOuter}{fibeamer@green!70!fibeamer@black}
+  \colorlet{fibeamer@dark@backgroundInner}{fibeamer@green!60!fibeamer@black}
+  \colorlet{fibeamer@dark@backgroundOuter}{fibeamer@green!60!fibeamer@black}
   \colorlet{fibeamer@light@backgroundInner}{fibeamer@white}
   \colorlet{fibeamer@light@backgroundOuter}{fibeamer@white}
 %    \end{macrocode}
@@ -38,7 +38,7 @@
     \begingroup
       \fibeamer@darktrue
       %% Structures
-      \setbeamercolor*{frametitle}{fg=fibeamer@green!30!fibeamer@white}
+      \setbeamercolor*{frametitle}{fg=fibeamer@lightGreen}
       \setbeamercolor*{framesubtitle}{fg=fibeamer@white}
       %% Text
       \setbeamercolor*{normal text}{fg=fibeamer@white, bg=fibeamer@green}
@@ -49,9 +49,14 @@
 %    \begin{macrocode}
       \setbeamercolor*{alerted text}{%
         fg=fibeamer@brightGreen!65!fibeamer@white}
-      %% Items
-      \setbeamercolor*{item}{fg=fibeamer@green!30!fibeamer@white}
-      \setbeamercolor*{footnote mark}{fg=fibeamer@green!30!fibeamer@white}
+%    \end{macrocode}
+% \changes{v1.1.4:3}{2016/05/06}{Added proper link coloring for the
+%   color themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+      %% Items, footnotes and links
+      \setbeamercolor*{item}{fg=fibeamer@lightGreen}
+      \setbeamercolor*{footnote mark}{fg=fibeamer@lightGreen}
+      \hypersetup{urlcolor=fibeamer@lightGreen}
       %% Blocks
       \setbeamercolor*{block title}{%
         fg=fibeamer@white, bg=fibeamer@green!60!fibeamer@white}
@@ -90,9 +95,14 @@
     \else % alerted text in plain block at light slides
       \setbeamercolor{alerted text}{fg=fibeamer@brightGreen!80!fibeamer@white}%
     \fi}{}
-  %% Items
-  \setbeamercolor{item}{fg=fibeamer@green}
-  \setbeamercolor{footnote mark}{fg=fibeamer@green}
+%    \end{macrocode}
+% \changes{v1.1.4:3}{2016/05/06}{Added proper link coloring for the
+%   color themes of the Masaryk University in Brno. [VN]}
+%    \begin{macrocode}
+      %% Items, footnotes and links
+      \setbeamercolor*{item}{fg=fibeamer@green}
+      \setbeamercolor*{footnote mark}{fg=fibeamer@green}
+      \hypersetup{urlcolor=fibeamer@green}
   %% Blocks
   \setbeamercolor{block title}{%
     fg=fibeamer@white, bg=fibeamer@green!50!fibeamer@white}
