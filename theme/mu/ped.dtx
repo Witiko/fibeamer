@@ -5,31 +5,28 @@
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{fibeamer/theme/mu/%
-  beamercolorthemefibeamer-mu-ped}[2016/01/14]
+  beamercolorthemefibeamer-mu-ped}[2016/05/06]
 \mode<presentation>
 %    \end{macrocode}
-% This color theme uses the combination of orange and dark gray in light frames
-% and the combination of gold and white in dark frames.  The
-% |fibeamer@back|\-|groundInner| and |fibeamer@backgroundOuter| colors are used
+% This color theme uses the combination of orange and shades of gray.  The
+% |fibeamer@{dark,|\-|light}@background{Inner,|\-|Outer}| colors are used
 % within the background canvas template, which is defined within the color
 % theme of the Masaryk University and which draws the gradient background of
 % dark frames.
+% \changes{v1.1.4:1}{2016/05/06}{Complately revamped the color theme for the
+%   Faculty of Informatics at the Masaryk University in Brno. [VN]}
 %    \begin{macrocode}
-  \definecolor{fibeamer@black}{HTML}{000000}
+  \definecolor{fibeamer@black}{HTML}{2B2E34}
   \definecolor{fibeamer@white}{HTML}{FFFFFF}
-  \definecolor{fibeamer@gold}{HTML}{CF7000}
-  \definecolor{fibeamer@orange}{HTML}{FABE6E}
-  \definecolor{fibeamer@darkOrange}{HTML}{F89C22}
-  \definecolor{fibeamer@brightOrange}{HTML}{FF4000}
-  \definecolor{fibeamer@gray}{HTML}{999999}
-%    \end{macrocode}
-% \changes{v1.1.4:2}{2016/05/06}{Removed gradient backgrounds from the color
-% themes for the Faculty of Informatics at the Masaryk University in Brno.
-% [VN]}
-%    \begin{macrocode}
+  \definecolor{fibeamer@lightOrange}{HTML}{FFA25E}
+  \definecolor{fibeamer@orange}{HTML}{FF5500}
+  \colorlet{fibeamer@lightGray}{white!80!fibeamer@black}
+  \colorlet{fibeamer@gray}{white!35!fibeamer@black}
+  \colorlet{fibeamer@darkGray}{white!20!fibeamer@black}
+  \colorlet{fibeamer@blue}{blue!60!fibeamer@lightGray}
   %% Background gradients
-  \colorlet{fibeamer@dark@backgroundInner}{fibeamer@gold!70!fibeamer@black}
-  \colorlet{fibeamer@dark@backgroundOuter}{fibeamer@gold!70!fibeamer@black}
+  \colorlet{fibeamer@dark@backgroundInner}{fibeamer@black}
+  \colorlet{fibeamer@dark@backgroundOuter}{fibeamer@black}
   \colorlet{fibeamer@light@backgroundInner}{fibeamer@white}
   \colorlet{fibeamer@light@backgroundOuter}{fibeamer@white}
 %    \end{macrocode}
@@ -40,82 +37,75 @@
     \begingroup
       \fibeamer@darktrue
       %% Structures
-      \setbeamercolor*{frametitle}{fg=fibeamer@gold!30!fibeamer@white}
-      \setbeamercolor*{framesubtitle}{fg=fibeamer@white}
+      \setbeamercolor*{frametitle}{fg=fibeamer@lightOrange}
+      \setbeamercolor*{framesubtitle}{fg=fibeamer@lightGray}
       %% Text
-      \setbeamercolor*{normal text}{fg=fibeamer@white, bg=fibeamer@gold}
-      \setbeamercolor*{structure}{fg=fibeamer@white, bg=fibeamer@gold}
+      \setbeamercolor*{normal text}{fg=white, bg=fibeamer@black}
+      \setbeamercolor*{structure}{fg=white, bg=fibeamer@black}
 %    \end{macrocode}
 % \changes{v1.1.0:7}{2016/01/12}{Added support for \cs{alert} to
 %   the themes of the Masaryk University in Brno. [VN]}
 %    \begin{macrocode}
       \setbeamercolor*{alerted text}{%
-        fg=fibeamer@white!40!fibeamer@brightOrange}
+        fg=fibeamer@lightOrange}
       %% Items
-      \setbeamercolor*{item}{fg=fibeamer@gold!30!fibeamer@white}
-      \setbeamercolor*{footnote mark}{fg=fibeamer@gold!30!fibeamer@white}
+      \setbeamercolor*{item}{fg=fibeamer@lightOrange}
+      \setbeamercolor*{footnote mark}{fg=fibeamer@lightOrange}
       %% Blocks
       \setbeamercolor*{block title}{%
-        fg=fibeamer@white, bg=fibeamer@gold!60!fibeamer@white}
+        fg=fibeamer@black, bg=fibeamer@lightOrange}
       \setbeamercolor*{block title example}{%
-        fg=fibeamer@white, bg=fibeamer@gold!60!fibeamer@white}
+        fg=fibeamer@black, bg=fibeamer@lightOrange}
       \setbeamercolor*{block title alerted}{%
-        fg=fibeamer@white, bg=fibeamer@gold!90!fibeamer@white}
+        fg=fibeamer@lightOrange, bg=fibeamer@darkGray}
       \setbeamercolor*{block body}{%
-        fg=fibeamer@gold, 
-        bg=fibeamer@gray!15!fibeamer@white}
+        fg=fibeamer@white, 
+        bg=fibeamer@darkGray}
       \usebeamercolor*{normal text}
       % Code listings
       \lstset{%
-        commentstyle=\color{green!30!fibeamer@white},
-        keywordstyle=\color{blue!30!fibeamer@white},
-        stringstyle=\color{fibeamer@gold!30!fibeamer@white}}
+        commentstyle=\color{green!30!white},
+        keywordstyle=\color{blue!30!white},
+        stringstyle=\color{fibeamer@orange!30!white}}
       }{%
     \endgroup}
 %    \end{macrocode}
 % Outside the |darkframes| environment, the light theme is used.
 %    \begin{macrocode}
   %% Structures
-  \setbeamercolor{frametitle}{fg=fibeamer@darkOrange}
-  \setbeamercolor{framesubtitle}{fg=fibeamer@black!60!fibeamer@white}
+  \setbeamercolor{frametitle}{fg=fibeamer@orange}
+  \setbeamercolor{framesubtitle}{fg=fibeamer@gray}
   %% Text
-  \setbeamercolor{normal text}{fg=fibeamer@black!75!fibeamer@white, bg=fibeamer@white}
-  \setbeamercolor{structure}{fg=fibeamer@black!75!fibeamer@white, bg=fibeamer@white}
+  \setbeamercolor{normal text}{fg=fibeamer@black, bg=fibeamer@white}
+  \setbeamercolor{structure}{fg=fibeamer@black, bg=fibeamer@white}
 %    \end{macrocode}
 % \changes{v1.1.0:7}{2016/01/12}{Added support for \cs{alert} to
 %   the themes of the Masaryk University in Brno. [VN]}
 %    \begin{macrocode}
-  \setbeamercolor{alerted text}{fg=fibeamer@brightOrange}
-  \addtobeamertemplate{block begin}{%
-    \iffibeamer@dark % alerted text in plain block at dark slides
-      \setbeamercolor{alerted text}{%
-        fg=fibeamer@white!20!fibeamer@brightOrange}%
-    \else % alerted text in plain block at light slides
-      \setbeamercolor{alerted text}{%
-        fg=fibeamer@white!20!fibeamer@brightOrange}%
-    \fi}{}
+  \setbeamercolor{alerted text}{fg=fibeamer@orange}
   %% Items
-  \setbeamercolor{item}{fg=fibeamer@darkOrange}
-  \setbeamercolor{footnote mark}{fg=fibeamer@darkOrange}
+  \setbeamercolor{item}{fg=fibeamer@orange}
+  \setbeamercolor{footnote mark}{fg=fibeamer@orange}
   %% Blocks
   \setbeamercolor{block title}{%
-    fg=fibeamer@black!75!fibeamer@white, bg=fibeamer@orange}
+    fg=fibeamer@black, bg=fibeamer@lightOrange}
   \setbeamercolor{block title example}{%
-    fg=fibeamer@black!75!fibeamer@white, bg=fibeamer@orange}
+    fg=fibeamer@black, bg=fibeamer@lightOrange}
   \setbeamercolor{block title alerted}{%
-    fg=fibeamer@white, bg=fibeamer@black!75!fibeamer@white}
+    fg=fibeamer@white, bg=fibeamer@black}
   \setbeamercolor{block body}{%
-    fg=fibeamer@orange, bg=fibeamer@black!75!fibeamer@white}
+    fg=fibeamer@lightOrange, bg=fibeamer@black}
   %% Title
-  \setbeamercolor{title}{fg=fibeamer@white, bg=fibeamer@gold}
+  \setbeamercolor{title}{fg=fibeamer@lightOrange, bg=fibeamer@black}
+  \setbeamercolor{subtitle}{fg=fibeamer@lightGray, bg=fibeamer@black}
   % Code listings
   \lstset{%
     basicstyle=\footnotesize\ttfamily,
     breakatwhitespace=false,
     breaklines=true,
-    commentstyle=\color{green!60!fibeamer@black},
+    commentstyle=\color{green!60!black},
     extendedchars=true,
-    keywordstyle=\color{blue},
+    keywordstyle=\color{fibeamer@blue},
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
