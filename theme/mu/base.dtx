@@ -347,7 +347,11 @@
       \pgfusepath{stroke}
     \end{pgfpicture}
     \vfill
-    
+%    \end{macrocode}
+% \changes{v1.1.4:4}{2016/05/06}{Added support for subtitle and
+%   author name coloring within the color themes for the Masaryk
+%   University in Brno. [VN]}
+%    \begin{macrocode}
     % Input the subtitle
     \usebeamerfont{subtitle}%
     \usebeamercolor[fg]{subtitle}%
@@ -358,6 +362,7 @@
 
     % Input the author's name
     \usebeamerfont{author}%
+    \usebeamercolor[fg]{author}%
     \begin{minipage}{\textwidth}
       \raggedright%
       \insertauthor%
