@@ -54,11 +54,12 @@
   \gdef\fibeamer@version@number{#1}
   \gdef\fibeamer@version@date{#2}
   \gdef\fibeamer@version{#2 #1 fibeamer MU beamer theme}}
-\fibeamer@versiondef{v1.1.4}{2016/05/18}}
+\fibeamer@versiondef{v1.1.5}{2016/06/16}}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
 %
-% \changes{v1.1.4}   {2016/05/18}{Added \texttt{pdfencoding=auto}
-%   to the \textsl{hyperref} package setup.}
+% \changes{v1.1.5:1} {2016/05/18}{Added \texttt{pdfencoding} to the
+%   \textsf{hyperref} package setup. This fixes the problem with garbled
+%   characters in PDF metadata with Lua\TeX.}
 % \iffalse Use `\fibeamer@version` as the PDF creator key.
 \hypersetup{%
   pdfcreator=\fibeamer@version,
