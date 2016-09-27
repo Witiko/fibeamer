@@ -54,7 +54,7 @@
   \gdef\fibeamer@version@number{#1}
   \gdef\fibeamer@version@date{#2}
   \gdef\fibeamer@version{#2 #1 fibeamer MU beamer theme}}
-\fibeamer@versiondef{v1.1.5}{2016/06/16}}
+\fibeamer@versiondef{v1.1.6-dev}{2016/09/27}}
 % {\newwrite\f\openout\f=VERSION\write\f{\fibeamer@version}\closeout\f}
 %
 % \changes{v1.1.5:1} {2016/05/18}{Added \texttt{pdfencoding} to the
@@ -494,7 +494,10 @@
 %   \item\textsf{dejavu} -- The DejaVu Sans Mono font family is
 %     used for the typesetting of monospaced text.
 %   \item\textsf{setspace} -- This package is used to adjust the
-%     leading to 115 \%.
+%     leading to 115 \%. Loading this package breaks any top-level
+%     footnotes without the \texttt{[frame]} optional parameter
+%     specified. This is a known bug.\footnote{See
+%       \url{http://tex.stackexchange.com/a/118005/70941}.}
 %   \item\textsf{fontenc} -- This package is used to set the font
 %     encoding to Cork. This package is only used outside the
 %     \Hologo{XeTeX} and \Hologo{LuaTeX} engines.
