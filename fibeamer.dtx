@@ -368,8 +368,8 @@
 % mer-mu-fi-english}.
 %    \begin{macrocode}
 \DeclareOptionBeamer{fallbackLogo}{\def\fibeamer@fallbackLogo{#1}}
-\def\fibeamer@fallbackLogo{%
-  \fibeamer@logoPath fibeamer-\fibeamer@university-%
+\ExecuteOptionsBeamer{%
+  fallbackLogo=\fibeamer@logoPath fibeamer-\fibeamer@university-%
     \fibeamer@faculty-english}
 %    \end{macrocode}
 % \end{macro}
@@ -494,7 +494,10 @@
 %   \item\textsf{dejavu} -- The DejaVu Sans Mono font family is
 %     used for the typesetting of monospaced text.
 %   \item\textsf{setspace} -- This package is used to adjust the
-%     leading to 115 \%.
+%     leading to 115 \%. Loading this package breaks any top-level
+%     footnotes without the \texttt{[frame]} optional parameter
+%     specified. This is a known bug.\footnote{See
+%       \url{http://tex.stackexchange.com/a/118005/70941}.}
 %   \item\textsf{fontenc} -- This package is used to set the font
 %     encoding to Cork. This package is only used outside the
 %     \Hologo{XeTeX} and \Hologo{LuaTeX} engines.
@@ -533,7 +536,7 @@
       \RequirePackage{fontspec}
       \setmonofont[Scale=0.85,Ligatures=TeX]{DejaVu Sans Mono}
     }{
-      \usepackage[scaled=0.85]{DejaVuSansMono}
+      \RequirePackage[scaled=0.85]{DejaVuSansMono}
       \RequirePackage[resetfonts]{cmap}
       \RequirePackage[T1]{fontenc}
     }
