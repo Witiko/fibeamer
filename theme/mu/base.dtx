@@ -310,6 +310,14 @@
 % |\subtitle|, and the |\author|.
 %    \begin{macrocode}
   \defbeamertemplate*{title page}{fibeamer}{%
+%    \end{macrocode}
+% \changes{v1.1.6}{2016/09/27}{The title frame now properly loads the
+%   color theme definitions for dark frames. As a result, the
+%   \textsf{hyperref} \textsc{url} color for light frames is no
+%   longer used in the title frame. [VN]}
+%    \begin{macrocode}
+    \begin{darkframes}
+
     % This is slide 0
     \setcounter{framenumber}{0}
 
@@ -366,7 +374,8 @@
     \begin{minipage}{\textwidth}
       \raggedright%
       \insertauthor%
-    \end{minipage}}
+    \end{minipage}
+    \end{darkframes}}
 
 \mode
 <all>
