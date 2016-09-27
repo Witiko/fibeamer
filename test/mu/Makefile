@@ -18,7 +18,8 @@ all:
 
 # This target runs a single test.
 expected-%.pdf: $(EXAMPLEDIR)/%.pdf
-	comparepdf --compare=appearance --verbose=1 $< $@
+	../comparepdf.sh $< $@ || \
+	{ [ "$(UPDATE_FAILED)" = true ] && mv $< $@; }
 
 # This is a dummy target.
 implode:
