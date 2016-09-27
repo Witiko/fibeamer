@@ -368,8 +368,8 @@
 % mer-mu-fi-english}.
 %    \begin{macrocode}
 \DeclareOptionBeamer{fallbackLogo}{\def\fibeamer@fallbackLogo{#1}}
-\def\fibeamer@fallbackLogo{%
-  \fibeamer@logoPath fibeamer-\fibeamer@university-%
+\ExecuteOptionsBeamer{%
+  fallbackLogo=\fibeamer@logoPath fibeamer-\fibeamer@university-%
     \fibeamer@faculty-english}
 %    \end{macrocode}
 % \end{macro}
@@ -534,7 +534,7 @@
       \RequirePackage{fontspec}
       \setmonofont[Scale=0.85,Ligatures=TeX]{DejaVu Sans Mono}
     }{
-      \usepackage[scaled=0.85]{DejaVuSansMono}
+      \RequirePackage[scaled=0.85]{DejaVuSansMono}
       \RequirePackage[resetfonts]{cmap}
       \RequirePackage[T1]{fontenc}
     }
