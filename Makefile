@@ -40,8 +40,8 @@ MISCELLANEOUS=guide/mu/guide.bib \
 	guide/mu/guide.dtx guide/mu/*.ins guide/mu/resources/cog.pdf \
   guide/mu/resources/vader.pdf guide/mu/resources/yoda.pdf \
 	$(USEREXAMPLES:.pdf=.tex) \
-	example/mu/resources/jabberwocky-dark.pdf \
-	example/mu/resources/jabberwocky-light.pdf README.md
+	example/mu/resources/jabberwocky-dark.png \
+	example/mu/resources/jabberwocky-light.png README.md
 RESOURCES=$(THEMEFILES) $(LOGOS) $(LOGOSOURCES)
 SOURCES=$(DTXFILES) $(INSFILES) LICENSE.tex
 AUXFILES=fibeamer.aux fibeamer.log fibeamer.toc fibeamer.ind \
