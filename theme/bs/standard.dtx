@@ -1,0 +1,113 @@
+% \file{theme/bs/beamercolorthemefibeamer-standard.sty}
+% This is the color theme for all the presentations written at the
+% University of Brescia. This theme has no effect outside the presentation mode.
+%    \begin{macrocode}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{fibeamer/theme/bs/%
+  beamercolorthemefibeamer-bs-standard}[2021-08-27]
+\mode<presentation>
+%    \end{macrocode}
+% This color theme uses the combination of yellow and shades of gray.  The
+% |fibeamer@{dark,|\-|light}@background{Inner,|\-|Outer}| colors are used
+% within the background canvas template, which is defined within the base
+% color theme of the Masaryk University and which draws the gradient
+% background of the frames.
+%    \begin{macrocode}
+  \definecolor{fibeamer@black}{HTML}{2B2E34}
+  \definecolor{fibeamer@white}{HTML}{FFFFFF}
+  \definecolor{fibeamer@blue}{HTML}{3C5896}
+  \colorlet{fibeamer@lightBlue}{fibeamer@blue!30!fibeamer@white}
+  \colorlet{fibeamer@darkBlue}{fibeamer@blue!50!fibeamer@black}
+  \definecolor{fibeamer@gray}{HTML}{BFBFBF}
+  \definecolor{fibeamer@lightOrange}{HTML}{FFA25E}
+  \colorlet{fibeamer@orange}{fibeamer@lightOrange!80!fibeamer@darkBlue}
+
+  %% Background gradients
+  \colorlet{fibeamer@dark@backgroundInner}{fibeamer@darkBlue}
+  \colorlet{fibeamer@dark@backgroundOuter}{fibeamer@darkBlue}
+  \colorlet{fibeamer@light@backgroundInner}{fibeamer@white}
+  \colorlet{fibeamer@light@backgroundOuter}{fibeamer@white}
+%    \end{macrocode}
+% The |darkframes| environment switches the |\iffibeamer@darktrue|
+% conditional on and sets a dark color theme.
+%    \begin{macrocode}
+  \renewenvironment{darkframes}{%
+    \begingroup
+      \fibeamer@darktrue
+      %% Structures
+      \setbeamercolor*{frametitle}{fg=fibeamer@gray!30!fibeamer@white}
+      \setbeamercolor*{framesubtitle}{fg=fibeamer@gray!30!fibeamer@white}
+      %% Text
+      \setbeamercolor*{normal text}{fg=fibeamer@white, bg=fibeamer@blue}
+      \setbeamercolor*{structure}{fg=fibeamer@white, bg=fibeamer@blue}
+
+      \setbeamercolor*{alerted text}{fg=fibeamer@lightOrange}
+
+      %% Items, footnotes and links
+      \setbeamercolor*{item}{fg=fibeamer@lightBlue}
+      \setbeamercolor*{footnote mark}{fg=fibeamer@lightBlue}
+      \hypersetup{urlcolor=fibeamer@lightBlue, citecolor=fibeamer@lightBlue}
+      %% Blocks
+      \setbeamercolor*{block title}{%
+        fg=fibeamer@white, bg=fibeamer@blue!60!fibeamer@white}
+      \setbeamercolor*{block title example}{%
+        fg=fibeamer@white, bg=fibeamer@blue!60!fibeamer@white}
+      \setbeamercolor*{block title alerted}{%
+        fg=fibeamer@darkBlue, bg=fibeamer@lightOrange}
+      \setbeamercolor*{block body}{%
+        fg=fibeamer@blue,
+        bg=fibeamer@gray!15!fibeamer@white}
+      \usebeamercolor*{normal text}
+      % Code listings
+      \lstset{%
+        commentstyle=\color{green!30!fibeamer@white},
+        keywordstyle=\color{blue!30!fibeamer@white},
+        stringstyle=\color{fibeamer@blue!30!fibeamer@white}}
+      }{%
+    \endgroup}
+%    \end{macrocode}
+% Outside the |darkframes| environment, the light theme is used.
+%    \begin{macrocode}
+  %% Structures
+  \setbeamercolor{frametitle}{fg=fibeamer@blue}
+  \setbeamercolor{framesubtitle}{fg=fibeamer@black!75!fibeamer@white}
+  %% Text
+  \setbeamercolor{normal text}{fg=fibeamer@black, bg=fibeamer@white}
+  \setbeamercolor{structure}{fg=fibeamer@black, bg=fibeamer@white}
+
+  \setbeamercolor{alerted text}{fg=red}
+  \addtobeamertemplate{block begin}{%
+    \iffibeamer@dark % alerted text in plain block at dark slides
+      \setbeamercolor{alerted text}{fg=fibeamer@orange}%
+    \fi}{}
+
+  %% Items, footnotes and links
+  \setbeamercolor{item}{fg=fibeamer@blue}
+  \setbeamercolor{footnote mark}{fg=fibeamer@blue}
+  \hypersetup{urlcolor=fibeamer@blue, citecolor=fibeamer@blue}
+  %% Blocks
+  \setbeamercolor{block title}{%
+    fg=fibeamer@white, bg=fibeamer@blue}
+  \setbeamercolor{block title example}{%
+    fg=fibeamer@white, bg=fibeamer@blue}
+  \setbeamercolor{block title alerted}{%
+    fg=fibeamer@white, bg=red}
+  \setbeamercolor{block body}{%
+    fg=fibeamer@blue, bg=fibeamer@gray!20!fibeamer@white}
+  %% Title
+  \setbeamercolor{title}{fg=fibeamer@white, bg=fibeamer@blue}
+  % Code listings
+  \lstset{%
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,
+    breaklines=true,
+    commentstyle=\color{green!60!fibeamer@black},
+    extendedchars=true,
+    keywordstyle=\color{blue},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    stringstyle=\color{violet}}
+\mode
+<all>
+%    \end{macrocode}

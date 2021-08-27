@@ -1,17 +1,17 @@
-SUBMAKES_REQUIRED=logo/mu theme/mu
-SUBMAKES_EXTRA=guide/mu example/mu
-SUBMAKES_TEST=test/mu
+SUBMAKES_REQUIRED=logo/mu theme/mu logo/bs theme/bs
+SUBMAKES_EXTRA=guide/mu example/mu example/bs
+SUBMAKES_TEST=test/mu test/bs
 SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_EXTRA) $(SUBMAKES_TEST)
 .PHONY: all base complete docs clean dist dist-implode implode \
 	install install-base install-docs uninstall tests $(SUBMAKES)
 
 BASETHEMEFILE=beamerthemefibeamer.sty
-OTHERTHEMEFILES=theme/mu/*.sty
+OTHERTHEMEFILES=theme/mu/*.sty theme/bs/*.sty
 THEMEFILES=$(BASETHEMEFILE) $(OTHERTHEMEFILES)
 LOGOSOURCES=logo/*/*.pdf
 LOGOS=logo/*/*.eps
-DTXFILES=*.dtx theme/mu/*.dtx
-INSFILES=*.ins theme/mu/*.ins
+DTXFILES=*.dtx theme/mu/*.dtx theme/bs/*.dtx
+INSFILES=*.ins theme/mu/*.ins theme/bs/*.ins
 TESTS=test/mu/*.pdf
 MAKES=guide/mu/Makefile theme/mu/Makefile logo/mu/Makefile Makefile \
 	test/mu/Makefile
