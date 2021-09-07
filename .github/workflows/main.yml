@@ -1,0 +1,50 @@
+name: Test
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+env:
+  DEBIAN_FRONTEND: noninteractive
+jobs:
+  test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install additional packages
+        run: |
+          set -ex
+          apt-get -qy update
+          apt-get -qy install inkscape zip
+      - name: Install the Fibeamer package
+        run: |
+          set -ex
+          make base
+          make install-base to="$HOME"/texmf nohash=true
+      - name: Typeset documentation, user guides, and user examples
+        run: |
+          set -ex
+          make dist
+      - name: Upload artifact fibeamer.tds.zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: fibeamer.tds.zip
+          path: fibeamer.tds.zip
+      - name: Upload artifact fibeamer.ctan.zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: fibeamer.ctan.zip
+          path: fibeamer.ctan.zip
+      - name: Upload artifact fibeamer.zip
+        uses: actions/upload-artifact@v2
+        with:
+          name: fibeamer.zip
+          path: fibeamer.zip
+      - name: Upload artifact fibeamer.pdf
+        uses: actions/upload-artifact@v2
+        with:
+          name: fibeamer.pdf
+          path: fibeamer.pdf
