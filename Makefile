@@ -1,9 +1,8 @@
 SUBMAKES_REQUIRED=logo/mu theme/mu logo/bs theme/bs
 SUBMAKES_EXTRA=guide/mu example/mu example/bs
-SUBMAKES_TEST=test/mu test/bs
-SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_EXTRA) $(SUBMAKES_TEST)
+SUBMAKES=$(SUBMAKES_REQUIRED) $(SUBMAKES_EXTRA)
 .PHONY: all base complete docs clean dist dist-implode implode \
-	install install-base install-docs uninstall tests $(SUBMAKES)
+	install install-base install-docs uninstall $(SUBMAKES)
 
 BASETHEMEFILE=beamerthemefibeamer.sty
 OTHERTHEMEFILES=theme/mu/*.sty theme/bs/*.sty
@@ -12,11 +11,10 @@ LOGOSOURCES=logo/*/*.pdf
 LOGOS=logo/*/*.eps
 DTXFILES=*.dtx theme/mu/*.dtx theme/bs/*.dtx
 INSFILES=*.ins theme/mu/*.ins theme/bs/*.ins
-TESTS=test/mu/*.pdf
 MAKES=guide/mu/Makefile theme/mu/Makefile logo/mu/Makefile Makefile \
-	test/mu/Makefile
-USEREXAMPLE_SOURCES=example/mu/Makefile example/mu/example.dtx \
-	example/mu/*.ins
+	theme/bs/Makefile logo/bs/Makefile
+USEREXAMPLE_SOURCES=example/mu/Makefile example/mu/example.dtx example/mu/*.ins \
+	example/bs/Makefile example/bs/example.dtx example/bs/standard.ins
 USEREXAMPLES=example/mu/econ-lualatex.pdf \
 	example/mu/econ-pdflatex.pdf example/mu/fi-lualatex.pdf \
 	example/mu/fi-pdflatex.pdf example/mu/fsps-lualatex.pdf \
@@ -26,22 +24,27 @@ USEREXAMPLES=example/mu/econ-lualatex.pdf \
 	example/mu/med-pdflatex.pdf example/mu/ped-lualatex.pdf \
 	example/mu/ped-pdflatex.pdf example/mu/phil-lualatex.pdf \
 	example/mu/phil-pdflatex.pdf example/mu/sci-lualatex.pdf \
-	example/mu/sci-pdflatex.pdf
+	example/mu/sci-pdflatex.pdf \
+	example/bs/standard-pdflatex.pdf example/bs/standard-lualatex.pdf
 DEVEXAMPLES=logo/DESCRIPTION logo/EXAMPLE/DESCRIPTION \
 	logo/mu/DESCRIPTION theme/EXAMPLE/DESCRIPTION \
 	theme/mu/DESCRIPTION theme/DESCRIPTION example/DESCRIPTION \
 	example/EXAMPLE/DESCRIPTION example/mu/DESCRIPTION \
 	example/mu/resources/DESCRIPTION guide/DESCRIPTION \
 	guide/EXAMPLE/DESCRIPTION guide/mu/DESCRIPTION \
-	guide/mu/resources/DESCRIPTION test/DESCRIPTION \
-	test/EXAMPLE/DESCRIPTION test/mu/DESCRIPTION
+	guide/mu/resources/DESCRIPTION \
+	theme/bs/DESCRIPTION logo/bs/DESCRIPTION example/bs/DESCRIPTION \
+	example/bs/resources/DESCRIPTION
 EXAMPLES=$(USEREXAMPLES) $(DEVEXAMPLES)
 MISCELLANEOUS=guide/mu/guide.bib \
 	guide/mu/guide.dtx guide/mu/*.ins guide/mu/resources/cog.pdf \
   guide/mu/resources/vader.pdf guide/mu/resources/yoda.pdf \
 	$(USEREXAMPLES:.pdf=.tex) \
 	example/mu/resources/jabberwocky-dark.png \
-	example/mu/resources/jabberwocky-light.png README.md
+	example/mu/resources/jabberwocky-light.png \
+	example/bs/resources/jabberwocky-dark.png \
+	example/bs/resources/jabberwocky-light.png \
+	README.md
 RESOURCES=$(THEMEFILES) $(LOGOS) $(LOGOSOURCES)
 SOURCES=$(DTXFILES) $(INSFILES) LICENSE.tex
 AUXFILES=fibeamer.aux fibeamer.log fibeamer.toc fibeamer.ind \
@@ -85,9 +88,6 @@ docs:
 $(SUBMAKES):
 	make -C $@ all
 
-# This pseudo-target performs the tests.
-tests: base $(SUBMAKES_TEST)
-
 # This pseudo-target creates the distribution archive.
 dist: dist-implode complete
 	make $(TDSARCHIVE) $(DISTARCHIVE) $(CTANARCHIVE)
@@ -117,24 +117,24 @@ $(TDSARCHIVE):
 	mv "$$DIR"/$@ $@ && rm -rf "$$DIR"
 
 # This target generates a distribution file.
-$(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) $(TESTS) \
+$(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
 	$(USEREXAMPLE_SOURCES) $(DOCS) $(PDFSOURCES) $(MISCELLANEOUS) \
 	$(EXAMPLES) $(VERSION)
 	DIR=`mktemp -d` && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \
 	cp --parents --verbose $^ "$$DIR" && \
-	(cd "$$DIR" && zip -r -v -nw $@ *) && \
+	(cd "$$DIR" && zip --symlinks -r -v -nw $@ *) && \
 	mv "$$DIR"/$@ . && rm -rf "$$DIR"
 
 # This target generates a CTAN distribution file.
-$(CTANARCHIVE): $(SOURCES) $(MAKES) $(TESTS) $(EXAMPLES) \
+$(CTANARCHIVE): $(SOURCES) $(MAKES) $(EXAMPLES) \
 	$(MISCELLANEOUS) $(DOCS) $(VERSION) $(LOGOSOURCES)
 	DIR=`mktemp -d` && mkdir -p "$$DIR/fibeamer" && \
 	cp --verbose $(TDSARCHIVE) "$$DIR" && \
 	cp --parents --verbose $^ "$$DIR/fibeamer" && \
 	printf '.PHONY: implode\nimplode:\n' > \
 		"$$DIR/fibeamer/example/mu/Makefile" && \
-	(cd "$$DIR" && zip -r -v -nw $@ *) && \
+	(cd "$$DIR" && zip --symlinks -r -v -nw $@ *) && \
 	mv "$$DIR"/$@ . && rm -rf "$$DIR"
 
 # This pseudo-target installs the logo and theme files - as well as
