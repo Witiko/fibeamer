@@ -130,7 +130,6 @@ $(DISTARCHIVE): $(SOURCES) $(RESOURCES) $(MAKES) \
 $(CTANARCHIVE): $(SOURCES) $(MAKES) $(EXAMPLES) \
 	$(MISCELLANEOUS) $(DOCS) $(VERSION) $(LOGOSOURCES)
 	DIR=`mktemp -d` && mkdir -p "$$DIR/fibeamer" && \
-	cp --verbose $(TDSARCHIVE) "$$DIR" && \
 	cp --parents --verbose $^ "$$DIR/fibeamer" && \
 	printf '.PHONY: implode\nimplode:\n' > \
 		"$$DIR/fibeamer/example/mu/Makefile" && \
